@@ -39,10 +39,6 @@ export default function RootLayout({
             <span className="nav-dot">&middot;</span>
             <a href="https://instagram.com/ghost_treatments" target="_blank" rel="noopener noreferrer">Instagram</a>
           </nav>
-          <Link href="/" className="site-logo">
-            <img src="/ghost-logo.png" alt="Ghost" />
-          </Link>
-          <p className="site-tagline">We put treatments together.</p>
         </header>
 
         <main>{children}</main>
