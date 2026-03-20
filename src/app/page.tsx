@@ -7,12 +7,6 @@ export default async function HomePage() {
 
   return (
     <div className="page-container">
-      <div className="hero">
-        <img src="/ghost-face.png" alt="" className="hero-face" />
-        <h1>Treatments by Ghost</h1>
-        <p>We put treatments together.</p>
-      </div>
-
       <div className="category-filter">
         <Link href="/" className="active">
           All
