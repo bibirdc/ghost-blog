@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Treatment Winning Bible | Pre-Order | Ghost</title>
+  <meta name="description" content="The first comprehensive guide to winning commercial treatments. Book + professional toolkit. Pre-order now at launch price.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --cream: #f5f0e8;
+      --amber: #d4a853;
+      --amber-dim: #b8923f;
+      --amber-glow: rgba(212, 168, 83, 0.06);
+      --grey: #6b6b6b;
+      --off-white: #e8e4dc;
+      --border: rgba(245, 240, 232, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.2rem;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s, padding 0.3s;
+    }
+    .nav.scrolled {
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+      display: block;
+      opacity: 0.8;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .nav-links a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--grey);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--amber); }
+    .nav-links .dot {
+      color: rgba(245, 240, 232, 0.15);
+      font-size: 0.6rem;
+    }
+    .nav-cta {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      background: var(--amber);
+      padding: 0.6rem 1.8rem;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--amber-dim);
+      transform: translateY(-1px);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to top, var(--black), transparent);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(0.8rem, 1.5vw, 1rem);
+      letter-spacing: 0.4em;
+      color: var(--amber);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease-out 0.2s forwards;
+    }
+
+    .hero-title-wrap {
+      position: relative;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease-out 0.4s forwards;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 18vw, 14rem);
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+    }
+    .hero-title span { display: block; }
+    .hero-title .accent {
+      color: var(--amber);
+      -webkit-text-stroke: 2px var(--amber);
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Pre-order widget floating beside title */
+    .hero-widget {
+      position: absolute;
+      right: 20%;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid rgba(212, 168, 83, 0.25);
+      padding: 2rem 2.5rem;
+      text-align: center;
+      background: rgba(212, 168, 83, 0.03);
+      width: 280px;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease-out 0.6s forwards;
+    }
+    .hero-widget-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--grey);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .hero-widget-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.2rem;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .hero-widget-price .currency {
+      font-size: 2rem;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    .hero-widget-original {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      color: var(--grey);
+      text-decoration: line-through;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.2rem;
+    }
+    .hero-widget-btn {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      background: var(--amber);
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      transition: background 0.3s;
+      margin-bottom: 0.8rem;
+    }
+    .hero-widget-btn:hover { background: var(--amber-dim); }
+    .hero-widget-format {
+      font-size: 0.9rem;
+      color: var(--grey);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      max-width: 600px;
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--off-white);
+      opacity: 0;
+      animation: fadeSlideUp 1s ease-out 0.6s forwards;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--grey);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 1.2s forwards;
+    }
+    .scroll-indicator::after {
+      content: '';
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--amber), transparent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ─── MANIFESTO / CONTENT SECTIONS ─── */
+    .manifesto {
+      padding: 5rem 2rem;
+      position: relative;
+    }
+    .manifesto-inner {
+      max-width: 900px;
+      margin-left: 10%;
+    }
+    .manifesto-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 8rem;
+      color: var(--amber);
+      opacity: 0.15;
+      position: absolute;
+      left: 2rem;
+      top: 6rem;
+      line-height: 1;
+    }
+    .manifesto blockquote {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-style: italic;
+      line-height: 1.4;
+      border-left: 3px solid var(--amber);
+      padding-left: 2rem;
+      margin-bottom: 2rem;
+    }
+    .manifesto p {
+      color: var(--grey);
+      max-width: 600px;
+      line-height: 1.4;
+    }
+
+    /* Flipped layout for zig-zag */
+    .manifesto.flipped .manifesto-inner {
+      margin-left: auto;
+      margin-right: 10%;
+      text-align: right;
+    }
+    .manifesto.flipped .manifesto-inner blockquote {
+      border-left: none;
+      border-right: 3px solid var(--amber);
+      padding-left: 0;
+      padding-right: 2rem;
+    }
+    .manifesto.flipped .manifesto-inner p {
+      margin-left: auto;
+    }
+    .manifesto.flipped .manifesto-number {
+      left: auto;
+      right: 2rem;
+      top: 6rem;
+    }
+
+    /* Section headers */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      border-bottom: 1px solid rgba(212, 168, 83, 0.2);
+      padding-bottom: 1rem;
+    }
+    .section-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: var(--amber);
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 6vw, 4rem);
+      letter-spacing: 0.05em;
+    }
+
+    .section-intro {
+      color: var(--grey);
+      max-width: 600px;
+      margin-top: -3rem;
+      margin-bottom: 4rem;
+      font-style: italic;
+      font-size: 1.15rem;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─── WHO THIS IS FOR (audience cards in original style) ─── */
+    .principles {
+      padding: 4rem 2rem 5rem;
+    }
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem 4rem;
+      max-width: 900px;
+      margin: 3rem auto 0;
+    }
+    .principle {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .principle.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .principle-number {
+      display: none;
+    }
+    .principle h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      color: var(--cream);
+      text-align: center;
+    }
+    .principle h3::after {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 2px;
+      background: var(--amber);
+      opacity: 0.5;
+      margin: 0.8rem auto 0;
+    }
+    .principle p {
+      color: var(--grey);
+      font-size: 1.1rem;
+    }
+
+    /* ─── WHAT'S INSIDE (trends-style list) ─── */
+    .trends {
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, rgba(212, 168, 83, 0.03) 0%, transparent 50%);
+    }
+    .trends-list {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .trends-list .trend:first-child {
+      padding-top: 0;
+    }
+    .trend {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.1);
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .trend.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .trend:last-child { border-bottom: none; padding-bottom: 0; }
+    .trend-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--amber);
+      line-height: 1;
+      opacity: 0.6;
+    }
+    .trend h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+    }
+    .trend p {
+      color: var(--grey);
+    }
+
+    /* ─── TOOLKIT SECTION ─── */
+    .toolkit-section {
+      padding: 5rem 2rem;
+    }
+    .toolkit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .toolkit-item {
+      display: block;
+      text-align: center;
+    }
+    .toolkit-number {
+      display: none;
+    }
+    .toolkit-item h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      color: var(--cream);
+      text-align: center;
+    }
+    .toolkit-item h3::after {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 2px;
+      background: var(--amber);
+      opacity: 0.5;
+      margin: 0.8rem auto 0;
+    }
+    .toolkit-item p {
+      color: var(--grey);
+      font-size: 1.05rem;
+    }
+    .toolkit-tag {
+      display: inline-block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--amber);
+      border: 1px solid rgba(212, 168, 83, 0.3);
+      padding: 0.25rem 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    /* ─── CREDIBILITY ─── */
+    .credibility {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .cred-item { padding: 2rem 1rem; }
+    .cred-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .cred-label {
+      font-size: 0.95rem;
+      color: var(--grey);
+    }
+
+    /* ─── PRICING ─── */
+    .pricing {
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    .pricing-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.4em;
+      color: var(--grey);
+      margin-bottom: 1rem;
+    }
+    .pricing-intro {
+      max-width: 650px;
+      margin: 0 auto 3rem;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--off-white);
+    }
+    .pricing-box {
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid rgba(212, 168, 83, 0.2);
+      padding: 4rem 3rem;
+      position: relative;
+    }
+    .pricing-box::before {
+      content: 'PRE-ORDER';
+      position: absolute;
+      top: -0.6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      color: var(--black);
+      background: var(--amber);
+      padding: 0.3rem 1.5rem;
+    }
+    .pricing-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-desc {
+      color: var(--grey);
+      font-style: italic;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+    .pricing-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .pricing-amount .currency {
+      font-size: 2.5rem;
+      vertical-align: top;
+      line-height: 1.4;
+    }
+    .pricing-original {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      color: var(--grey);
+      text-decoration: line-through;
+      margin-bottom: 2rem;
+    }
+    .pricing-includes {
+      text-align: left;
+      max-width: 380px;
+      margin: 0 auto 2.5rem;
+      list-style: none;
+    }
+    .pricing-includes li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.08);
+      color: var(--off-white);
+      font-size: 1rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+    .pricing-includes li::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+    .pricing-btn {
+      display: inline-block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      background: var(--amber);
+      padding: 1rem 3.5rem;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+      margin-bottom: 1.5rem;
+    }
+    .pricing-btn:hover {
+      background: var(--amber-dim);
+      transform: translateY(-2px);
+    }
+    .pricing-guarantee {
+      font-size: 0.95rem;
+      color: var(--grey);
+      font-style: italic;
+    }
+
+    /* ─── FAQ ─── */
+    .faq {
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .faq-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.6rem;
+      color: var(--cream);
+    }
+    .faq-item p {
+      color: var(--grey);
+      font-size: 1.1rem;
+    }
+    .faq-item a {
+      color: var(--amber);
+      text-decoration: none;
+    }
+
+    /* ─── CLOSING ─── */
+    .closing {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+    }
+    .closing::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 100px;
+      background: linear-gradient(to bottom, transparent, var(--amber));
+    }
+    .closing-text {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-style: italic;
+      max-width: 800px;
+      margin-bottom: 3rem;
+      line-height: 1.3;
+    }
+    .closing-text strong {
+      color: var(--amber);
+      font-style: normal;
+    }
+    .author {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.4em;
+      color: var(--grey);
+    }
+    .author a {
+      color: var(--amber);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    .author a:hover { opacity: 0.7; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 4rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(245, 240, 232, 0.1);
+    }
+    footer p {
+      color: var(--grey);
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: var(--grey);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    footer a:hover { color: var(--amber); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .manifesto-inner { margin-left: 0; }
+      .manifesto-number {
+        font-size: 5rem;
+        position: relative;
+        left: 0; top: 0;
+        margin-bottom: 1rem;
+      }
+      .section-header {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .trend {
+        grid-template-columns: 50px 1fr;
+        gap: 1rem;
+      }
+      .trend-number { font-size: 2.5rem; }
+      .principles-grid { grid-template-columns: 1fr; max-width: 100%; }
+      .toolkit-grid { grid-template-columns: 1fr; }
+      .cred-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-box { padding: 3rem 2rem; }
+      .nav-links { display: none; }
+      .hero-widget {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        max-width: 320px;
+        margin-top: 2rem;
+        padding: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cred-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-left">
+      <a href="https://treatmentsbyghost.com" class="nav-logo">
+        <img src="https://ghost-newsletter-assets.vercel.app/ghost-face.png" alt="Ghost">
+      </a>
+      <div class="nav-links">
+        <a href="https://treatmentsbyghost.com">Website</a>
+        <span class="dot">&middot;</span>
+        <a href="https://instagram.com/ghost_treatments">Instagram</a>
+        <span class="dot">&middot;</span>
+        <a href="mailto:info@treatmentsbyghost.com">Contact</a>
+      </div>
+    </div>
+    <a href="https://buy.stripe.com/4gMbJ26Ja0xQfmM4IOf3a00" target="_blank" rel="noopener noreferrer" class="nav-cta">Pre-Order Now</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">From the Team Behind Hundreds of Winning&nbsp;Treatments</p>
+    <div class="hero-title-wrap">
+      <h1 class="hero-title">
+        <span>The Treatment</span>
+        <span class="accent">Winning</span>
+        <span>Bible</span>
+      </h1>
+      <div class="hero-widget">
+        <p class="hero-widget-label">Pre-Order Price</p>
+        <div class="hero-widget-price"><span class="currency">$</span>79</div>
+        <div class="hero-widget-original">$99 after launch</div>
+        <a href="https://buy.stripe.com/4gMbJ26Ja0xQfmM4IOf3a00" target="_blank" rel="noopener noreferrer" class="hero-widget-btn">Pre-Order Now</a>
+        <p class="hero-widget-format">Digital Book + Toolkit</p>
+      </div>
+    </div>
+    <p class="hero-subtitle">
+      The formula behind multiple-figure pitches;<br>
+      how to make a winning treatment, what to avoid,<br>
+      what tools to use and what agencies actually look&nbsp;for.
+    </p>
+    <div class="scroll-indicator">Scroll</div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="manifesto">
+    <span class="manifesto-number">01</span>
+    <div class="manifesto-inner">
+      <blockquote>
+        Successful treatments keep the business alive. And yet, there is no school, no textbook, and no course that teaches you how to make&nbsp;one.
+      </blockquote>
+      <p>
+        Directors get tunnel vision; writing treatments that satisfy their own creative intention but not what the agency actually needs answered. In-house teams get overwhelmed; queries from all sides, all due now, no structured workflow to fall back on. The whole process turns into a mess. Not&nbsp;anymore.
+      </p>
+    </div>
+  </section>
+
+  <!-- WHY US + QUOTE -->
+  <section class="manifesto flipped">
+    <span class="manifesto-number">02</span>
+    <div class="manifesto-inner">
+      <blockquote>
+        The difference between winning and losing is rarely talent; it's usually down to&nbsp;strategy.
+      </blockquote>
+      <p>
+        We've seen it hundreds of times; watched treatments win and asked for feedback on the ones that didn't. There isn't an exact formula, but there is a formula. Over 10 years of writing treatments across multiple languages; we learned a thing or two, and we're excited to share it with&nbsp;you.
+      </p>
+    </div>
+  </section>
+
+  <!-- WHO THIS IS FOR -->
+  <section class="principles">
+    <header style="text-align: center; margin-bottom: 3rem;">
+      <h2 class="section-title" style="margin-bottom: 0.5rem;">Who This Is For</h2>
+      <p style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(0.8rem, 1.5vw, 1rem); letter-spacing: 0.4em; color: var(--amber); text-align: center; margin: -0.5rem 0 0; text-transform: uppercase;">If you touch treatments, this is for&nbsp;you.</p>
+    </header>
+
+    <div class="principles-grid">
+      <article class="principle">
+        <span class="principle-number">01</span>
+        <h3>Treatment Makers &amp; Designers</h3>
+        <p>No mentor, no curriculum, no reference for what "good" means. The Bible gives you the decade of pattern recognition you don't have yet; and the design tools to execute on&nbsp;it&nbsp;immediately.</p>
+      </article>
+
+      <article class="principle">
+        <span class="principle-number">02</span>
+        <h3>Directors</h3>
+        <p>You're losing pitches and you don't know why. We've worked with hundreds of directors; most likely your competitors. We see the weak links from a mile away; and help you seal&nbsp;the&nbsp;deal.</p>
+      </article>
+
+      <article class="principle">
+        <span class="principle-number">03</span>
+        <h3>Executive Producers</h3>
+        <p>A framework to pick the right team, evaluate work, give precise notes, and know when a treatment is ready to send; before it costs you the job. Seasoned or new&nbsp;to&nbsp;the&nbsp;role.</p>
+      </article>
+
+      <article class="principle">
+        <span class="principle-number">04</span>
+        <h3>Production Companies</h3>
+        <p>Hand your team the toolkit; font systems, colour palettes, layout blueprints, checklists; and their output quality jumps from day one. No more hoping the junior&nbsp;figures&nbsp;it&nbsp;out.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- WHAT'S INSIDE: THE BOOK (chapters as trends-style list) -->
+  <section class="trends">
+    <header style="text-align: center; margin-bottom: 3rem;">
+      <h2 class="section-title" style="margin-bottom: 0.5rem;">The Book</h2>
+      <p style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(0.8rem, 1.5vw, 1rem); letter-spacing: 0.4em; color: var(--amber); text-align: center; margin: -0.5rem 0 0; text-transform: uppercase;">~50 pages written by&nbsp;a&nbsp;human</p>
+    </header>
+
+    <div class="trends-list">
+      <article class="trend">
+        <span class="trend-number">01</span>
+        <div>
+          <h3>Treatment Anatomy</h3>
+          <p>The structure agencies expect.<br>What goes where, what you can skip, and the sections most people&nbsp;get&nbsp;wrong.</p>
+        </div>
+      </article>
+
+      <article class="trend">
+        <span class="trend-number">02</span>
+        <div>
+          <h3>How Agencies Actually Read</h3>
+          <p>As sad as it may sound, agencies don't read; they scan through the treatment.<br>This chapter shows you what they're looking for and where,<br>so you stop burying your best ideas on&nbsp;random&nbsp;pages.</p>
+        </div>
+      </article>
+
+      <article class="trend">
+        <span class="trend-number">03</span>
+        <div>
+          <h3>Writing That Wins</h3>
+          <p>Text is one of those things "that no one reads" until they do, and it can make or break a treatment.<br>Most treatment texts are too long, too vague and not answering the right questions.&nbsp;Not&nbsp;anymore.</p>
+        </div>
+      </article>
+
+      <article class="trend">
+        <span class="trend-number">04</span>
+        <div>
+          <h3>Layout &amp; Design</h3>
+          <p>The layout should support the argument, not carry it.<br>Typography, spacing, rhythm, and the visual hierarchy that makes a treatment feel considered,&nbsp;not&nbsp;decorated.</p>
+        </div>
+      </article>
+
+      <article class="trend">
+        <span class="trend-number">05</span>
+        <div>
+          <h3>Competitive Strategy</h3>
+          <p>You're always pitching against someone.<br>How to think about your competition, play to your strengths,<br>and tailor your pitch based on what others will and&nbsp;won't&nbsp;bring.</p>
+        </div>
+      </article>
+
+      <article class="trend">
+        <span class="trend-number">06</span>
+        <div>
+          <h3>Client Psychology</h3>
+          <p>Directors forget they're working for the client, not for themselves.<br>How decisions actually get made, what builds trust, and why the best idea doesn't&nbsp;always&nbsp;win.</p>
+        </div>
+      </article>
+
+      <article class="trend">
+        <span class="trend-number">07</span>
+        <div>
+          <h3>Visual Research Method</h3>
+          <p>Where to find references, how to curate them, and building mood boards<br>in alignment with the director's view, the client's expectations, and the&nbsp;agency's&nbsp;picky&nbsp;eye.</p>
+        </div>
+      </article>
+
+      <article class="trend">
+        <span class="trend-number">08</span>
+        <div>
+          <h3>Be Ahead of the Curve</h3>
+          <p>Treatments change constantly.<br>There are ways to predict what's coming, stay up to date with competitors,<br>and keep your work fresh;&nbsp;never&nbsp;dated.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- THE TOOLKIT -->
+  <section class="toolkit-section">
+    <header style="text-align: center; margin-bottom: 4rem;">
+      <h2 class="section-title" style="margin-bottom: 0.5rem;">The Toolkit</h2>
+      <p style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(0.8rem, 1.5vw, 1rem); letter-spacing: 0.4em; color: var(--amber); text-align: center; margin: -0.5rem 0 0; text-transform: uppercase;">Production-ready assets your team can&nbsp;use&nbsp;tomorrow</p>
+    </header>
+
+    <div class="toolkit-grid">
+      <div class="toolkit-item reveal">
+        <span class="toolkit-number">01</span>
+        <div>
+          <h3>Font Pairings</h3>
+          <p>50+ curated heading + body pairings organised by advertising category; auto, fashion, food, lifestyle, sport, tech, luxury, and more. All free Google Fonts with interactive&nbsp;HTML&nbsp;sampler.</p>
+          <span class="toolkit-tag">Interactive HTML + PDF</span>
+        </div>
+      </div>
+      <div class="toolkit-item reveal">
+        <span class="toolkit-number">02</span>
+        <div>
+          <h3>Colour Systems</h3>
+          <p>Functional treatment palettes; not just pretty swatches. Background, text, accent, section divider, and label colours that work across light and dark sections.</p>
+          <span class="toolkit-tag">30+ Colour Systems</span>
+        </div>
+      </div>
+      <div class="toolkit-item reveal">
+        <span class="toolkit-number">03</span>
+        <div>
+          <h3>Layout Blueprints</h3>
+          <p>Annotated wireframes for proven treatment architectures: The Classic, The Cinematic, The Editorial, The Pitch Deck. Know which structure suits which brief.</p>
+          <span class="toolkit-tag">4 Annotated Templates</span>
+        </div>
+      </div>
+      <div class="toolkit-item reveal">
+        <span class="toolkit-number">04</span>
+        <div>
+          <h3>The Treatment Checklist</h3>
+          <p>Treatment-making is chaotic and deadline-driven. This is the grounding document; the "before you send" audit that prevents the "I can't believe I forgot to include that" moment.</p>
+          <span class="toolkit-tag">Printable PDF</span>
+        </div>
+      </div>
+      <div class="toolkit-item reveal">
+        <span class="toolkit-number">05</span>
+        <div>
+          <h3>Visual Research Guide</h3>
+          <p>Where to find the best reference imagery, how to organise a research folder, and the methodology behind mood boards that persuade; not just decorate.</p>
+          <span class="toolkit-tag">Curated Source List</span>
+        </div>
+      </div>
+      <div class="toolkit-item reveal">
+        <span class="toolkit-number">06</span>
+        <div>
+          <h3>Texture Pack</h3>
+          <p>Original abstract artwork by Ghost, cleared for commercial treatment use. Section backgrounds, dividers, and overlays that add depth no stock image can match.</p>
+          <span class="toolkit-tag">15 High-Res Files</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDIBILITY -->
+  <section class="credibility">
+    <div class="cred-grid">
+      <div class="cred-item reveal">
+        <div class="cred-number">10+</div>
+        <div class="cred-label">Years making treatments&nbsp;professionally</div>
+      </div>
+      <div class="cred-item reveal">
+        <div class="cred-number">100s</div>
+        <div class="cred-label">Treatments built across every&nbsp;vertical</div>
+      </div>
+      <div class="cred-item reveal">
+        <div class="cred-number">$79</div>
+        <div class="cred-label">Against jobs worth six and seven&nbsp;figures</div>
+      </div>
+      <div class="cred-item reveal">
+        <div class="cred-number">0</div>
+        <div class="cred-label">Other products like this in&nbsp;existence</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <p class="pricing-label">Limited Launch Price</p>
+    <p class="pricing-intro">The formula behind multiple-figure pitches; how to make a winning treatment, what to avoid, what tools to use and what agencies actually look&nbsp;for.</p>
+    <div class="pricing-box reveal">
+      <h2 class="pricing-title">The Treatment Winning Bible</h2>
+      <p class="pricing-desc">Book + Complete Toolkit</p>
+      <div class="pricing-amount"><span class="currency">$</span>79</div>
+      <div class="pricing-original">$99 after launch</div>
+      <ul class="pricing-includes">
+        <li>~50-page digital book (PDF)</li>
+        <li>Font pairings (HTML + PDF)</li>
+        <li>Colour systems</li>
+        <li>4 layout blueprint templates</li>
+        <li>Treatment checklist</li>
+        <li>Visual research guide</li>
+        <li>Original texture pack</li>
+        <li>All future updates included</li>
+      </ul>
+      <a href="https://buy.stripe.com/4gMbJ26Ja0xQfmM4IOf3a00" target="_blank" rel="noopener noreferrer" class="pricing-btn">Pre-Order Now</a>
+      <p class="pricing-guarantee">Delivered digitally within 4&ndash;6 weeks. Full refund if we don't&nbsp;deliver.</p>
+      <p class="pricing-guarantee" style="margin-top: 0.5rem;">That's less than 0.01% of the job your next treatment could&nbsp;win.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <header style="text-align: center; margin-bottom: 4rem;">
+      <h2 class="section-title" style="margin-bottom: 0.5rem;">Questions</h2>
+      <p style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(0.8rem, 1.5vw, 1rem); letter-spacing: 0.4em; color: var(--amber); text-align: center; margin: -0.5rem 0 0; text-transform: uppercase;">Before you decide</p>
+    </header>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <h3>When Will I Receive It?</h3>
+        <p>Within 4&ndash;6 weeks of your pre-order. You'll receive the complete package; book and all toolkit files; delivered to your email.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h3>What Format Is It In?</h3>
+        <p>The book is a designed PDF. The font pairings come as an interactive HTML file you can open in any browser, plus a PDF reference. Colour systems, blueprints, and checklist are all PDF. Textures are high-resolution PNG/JPG.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h3>I'm Experienced; Is This Too Basic?</h3>
+        <p>Even experienced directors have blind spots. Most have never gotten honest feedback on why a treatment lost; they just didn't get the call. The Bible draws on patterns from hundreds of treatments, including the competitive strategy and client psychology that even senior directors rarely think about. And the toolkit saves time regardless of how long you've been doing this.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h3>Can I Share It With My Team?</h3>
+        <p>One purchase covers one team. If you're a production company wanting to distribute it internally, get in touch and we'll work something out.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h3>Who Wrote This?</h3>
+        <p>Ghost; the only studio and blog dedicated to commercial treatment design. Over a decade of hands-on experience with directors, agencies, and production companies worldwide. Read our work at <a href="https://treatmentsbyghost.com">treatmentsbyghost.com</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <p class="closing-text">
+      Winning a treatment isn't about having better references than the next director.<br>
+      It comes down to something far simpler and far more <strong>strategic</strong>.
+    </p>
+    <p class="author">
+      Words by <a href="https://treatmentsbyghost.com" target="_blank">Ghost</a>
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      <a href="https://treatmentsbyghost.com">Website</a> &nbsp;&middot;&nbsp;
+      <a href="https://instagram.com/ghost_treatments">Instagram</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:info@treatmentsbyghost.com">Contact</a>
+    </p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const siblings = entry.target.parentElement?.children;
+          const idx = siblings ? Array.from(siblings).indexOf(entry.target) : 0;
+          setTimeout(() => entry.target.classList.add('visible'), idx * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    document.querySelectorAll('.principle, .trend, .reveal').forEach(el => observer.observe(el));
+
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    });
+  </script>
+
+</body>
+</html>
