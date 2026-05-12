@@ -59,9 +59,9 @@ export default async function HomePage() {
           Plus weekly insights on treatment design, visual research,
           and what actually wins pitches. No fluff. Unsubscribe anytime.
         </p>
-        <a href="/subscribe" className="cta-button">
+        <Link href="/subscribe" className="cta-button">
           Subscribe and get the excerpt
-        </a>
+        </Link>
       </div>
     </div>
   );

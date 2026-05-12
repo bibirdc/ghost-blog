@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getAllPosts, getPostBySlug } from '@/lib/wordpress';
+import { getAllPosts, getPostBySlug, rewriteContentUrls } from '@/lib/wordpress';
 import { notFound } from 'next/navigation';
 
 interface PageProps {
@@ -36,11 +36,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 function cleanContent(html: string): string {
-  // Remove WordPress block comments but keep the HTML content
-  return html
-    .replace(/<!-- wp:[^\n]* -->/g, '')
-    .replace(/<!-- \/wp:[^\n]* -->/g, '')
-    .trim();
+  return rewriteContentUrls(
+    html
+      .replace(/<!-- wp:[^\n]* -->/g, '')
+      .replace(/<!-- \/wp:[^\n]* -->/g, '')
+      .trim()
+  );
 }
 
 export default async function PostPage({ params }: PageProps) {
@@ -86,9 +87,9 @@ export default async function PostPage({ params }: PageProps) {
           Plus weekly insights on treatment design, visual research,
           and what actually wins pitches. No fluff. Unsubscribe anytime.
         </p>
-        <a href="/subscribe" className="cta-button">
+        <Link href="/subscribe" className="cta-button">
           Subscribe and get the excerpt
-        </a>
+        </Link>
       </div>
 
       {post.tags.length > 0 && (

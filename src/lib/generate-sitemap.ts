@@ -5,7 +5,7 @@ import { getAllPosts, getAllCategories } from './wordpress';
 async function generateSitemap() {
   const posts = await getAllPosts();
   const categories = await getAllCategories();
-  const baseUrl = 'https://treatmentsbyghost.com';
+  const baseUrl = 'https://treatmentsbyghost.com/blog';
   const today = new Date().toISOString().split('T')[0];
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>

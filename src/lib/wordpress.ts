@@ -36,7 +36,24 @@ function extractCDATA(val: unknown): string {
 
 function extractFirstImage(html: string): string | null {
   const imgMatch = html.match(/<img[^>]+src=["']([^"']+)["']/i);
-  return imgMatch ? imgMatch[1] : null;
+  if (!imgMatch) return null;
+  return prefixRootRelative(imgMatch[1]);
+}
+
+function prefixRootRelative(url: string): string {
+  // Prefix root-relative URLs (e.g. /foo.png) with /blog so they resolve under basePath.
+  // Leave protocol-absolute (https://, //) and already-prefixed (/blog/...) URLs alone.
+  if (url.startsWith('/blog/') || url === '/blog') return url;
+  if (url.startsWith('/') && !url.startsWith('//')) return '/blog' + url;
+  return url;
+}
+
+export function rewriteContentUrls(html: string): string {
+  // Prefix root-relative src and href attributes inside post HTML so images and
+  // internal links resolve correctly under the /blog basePath.
+  return html.replace(/(\s(?:src|href)=)["'](\/(?!\/|blog\/|blog["'])[^"']*)["']/gi, (_m, attr, path) => {
+    return `${attr}"/blog${path}"`;
+  });
 }
 
 function generateExcerpt(html: string, maxLength = 200): string {

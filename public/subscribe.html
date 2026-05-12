@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Subscribe — Treatments by Ghost</title>
   <meta name="description" content="Get a free excerpt from The Treatment Winning Bible plus weekly insights on treatment design and winning pitches.">
-  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="/blog/favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -155,8 +155,8 @@
 </head>
 <body>
   <div class="subscribe-container">
-    <a href="/">
-      <img src="/ghost-logo.png" alt="Ghost" class="logo">
+    <a href="/blog/">
+      <img src="/blog/ghost-logo.png" alt="Ghost" class="logo">
     </a>
     <p class="label">Free with every signup</p>
     <h1>Get a free excerpt from The Treatment Winning Bible</h1>
@@ -179,7 +179,7 @@
       </button>
     </form>
     <p class="message" id="message"></p>
-    <a href="/" class="back-link">&larr; Back to the blog</a>
+    <a href="/blog/" class="back-link">&larr; Back to the blog</a>
   </div>
 
   <script>
@@ -197,7 +197,7 @@
       msg.className = 'message';
 
       try {
-        var res = await fetch('/api/subscribe', {
+        var res = await fetch('/blog/api/subscribe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: email })
@@ -208,7 +208,7 @@
           msg.className = 'message success';
           btn.textContent = 'Done';
           setTimeout(function() {
-            window.location.href = '/bible-sample';
+            window.location.href = '/blog/bible-sample';
           }, 1500);
         } else {
           var data = await res.json();

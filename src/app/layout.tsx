@@ -40,7 +40,7 @@ export default function RootLayout({
             <a href="https://instagram.com/ghost_treatments" target="_blank" rel="noopener noreferrer">Instagram</a>
           </nav>
           <Link href="/" className="site-logo">
-            <img src="/ghost-logo.png" alt="Ghost" />
+            <img src="/blog/ghost-logo.png" alt="Ghost" />
           </Link>
           <p className="site-tagline">We put treatments together.</p>
         </header>

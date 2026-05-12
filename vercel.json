@@ -1,16 +1,19 @@
 {
+  "redirects": [
+    { "source": "/post/:slug*", "destination": "/blog/post/:slug*", "permanent": true },
+    { "source": "/category/:slug*", "destination": "/blog/category/:slug*", "permanent": true },
+    { "source": "/about", "destination": "/blog/about", "permanent": true },
+    { "source": "/bible-sample", "destination": "/blog/bible-sample", "permanent": true }
+  ],
   "rewrites": [
-    {
-      "source": "/bible",
-      "destination": "/bible.html"
-    },
-    {
-      "source": "/subscribe",
-      "destination": "/subscribe.html"
-    },
-    {
-      "source": "/font-sample",
-      "destination": "/toolkit-sample"
-    }
+    { "source": "/blog", "destination": "/" },
+    { "source": "/blog/bible", "destination": "/bible.html" },
+    { "source": "/blog/subscribe", "destination": "/subscribe.html" },
+    { "source": "/blog/font-sample", "destination": "/toolkit-sample" },
+    { "source": "/blog/api/:path*", "destination": "/api/:path*" },
+    { "source": "/blog/:path*", "destination": "/:path*" },
+    { "source": "/bible", "destination": "/bible.html" },
+    { "source": "/subscribe", "destination": "/subscribe.html" },
+    { "source": "/font-sample", "destination": "/toolkit-sample" }
   ]
 }
