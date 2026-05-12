@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscribe — Treatments by Ghost</title>
+  <meta name="description" content="Get a free excerpt from The Treatment Winning Bible plus weekly insights on treatment design and winning pitches.">
+  <link rel="icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .subscribe-container {
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .logo {
+      width: 200px;
+      margin-bottom: 3rem;
+      opacity: 0.9;
+    }
+
+    .label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #efc311;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: #a3a3a3;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .subscribe-form {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 400px;
+      margin: 0 auto 1rem;
+    }
+
+    .subscribe-input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      background: #171717;
+      border: 1px solid #404040;
+      border-radius: 2px;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .subscribe-input:focus {
+      border-color: #efc311;
+    }
+
+    .subscribe-input::placeholder {
+      color: #737373;
+    }
+
+    .subscribe-btn {
+      padding: 0.75rem 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: #efc311;
+      color: #000;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .subscribe-btn:hover {
+      opacity: 0.85;
+    }
+
+    .subscribe-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .message {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      min-height: 1.5em;
+    }
+
+    .message.success {
+      color: #efc311;
+    }
+
+    .message.error {
+      color: #ef4444;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #525252;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: #efc311;
+    }
+
+    @media (max-width: 480px) {
+      .subscribe-form {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="subscribe-container">
+    <a href="/">
+      <img src="/ghost-logo.png" alt="Ghost" class="logo">
+    </a>
+    <p class="label">Free with every signup</p>
+    <h1>Get a free excerpt from The Treatment Winning Bible</h1>
+    <p class="subtitle">
+      Subscribe and get an exclusive excerpt from the first guide
+      on winning commercial treatments. Plus weekly insights on
+      treatment design, visual research, and what actually
+      wins pitches.
+    </p>
+    <form class="subscribe-form" id="subscribeForm">
+      <input
+        type="email"
+        class="subscribe-input"
+        id="emailInput"
+        placeholder="Your email"
+        required
+      >
+      <button type="submit" class="subscribe-btn" id="submitBtn">
+        Subscribe
+      </button>
+    </form>
+    <p class="message" id="message"></p>
+    <a href="/" class="back-link">&larr; Back to the blog</a>
+  </div>
+
+  <script>
+    document.getElementById('subscribeForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var email = document.getElementById('emailInput').value.trim();
+      var btn = document.getElementById('submitBtn');
+      var msg = document.getElementById('message');
+
+      if (!email) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Subscribing...';
+      msg.textContent = '';
+      msg.className = 'message';
+
+      try {
+        var res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        });
+
+        if (res.ok) {
+          msg.textContent = 'You are in. Redirecting to your free excerpt...';
+          msg.className = 'message success';
+          btn.textContent = 'Done';
+          setTimeout(function() {
+            window.location.href = '/bible-sample';
+          }, 1500);
+        } else {
+          var data = await res.json();
+          throw new Error(data.error || 'Failed');
+        }
+      } catch (err) {
+        msg.textContent = err.message || 'Something went wrong. Please try again.';
+        msg.className = 'message error';
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      }
+    });
+  </script>
+</body>
+</html>

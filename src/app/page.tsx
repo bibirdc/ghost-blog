@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { getAllPosts, getAllCategories } from '@/lib/wordpress';
+import { generateSearchIndex } from '@/lib/generate-search-index';
 
 export default async function HomePage() {
   const posts = await getAllPosts();
   const categories = await getAllCategories();
+  await generateSearchIndex();
 
   return (
     <div className="page-container">
@@ -50,17 +52,15 @@ export default async function HomePage() {
         ))}
       </div>
 
-      <div className="newsletter-cta">
-        <h3>Stay in the loop</h3>
+      <div className="newsletter-cta" id="newsletter-cta">
+        <p className="newsletter-label">Free with every signup</p>
+        <h3>Get a free excerpt from The Treatment Winning Bible</h3>
         <p>
-          Get insights on treatment design, commercial filmmaking, and the
-          advertising industry delivered to your inbox.
+          Plus weekly insights on treatment design, visual research,
+          and what actually wins pitches. No fluff. Unsubscribe anytime.
         </p>
-        <a
-          href="mailto:info@treatmentsbyghost.com?subject=Newsletter%20Signup"
-          className="cta-button"
-        >
-          Subscribe
+        <a href="/subscribe" className="cta-button">
+          Subscribe and get the excerpt
         </a>
       </div>
     </div>

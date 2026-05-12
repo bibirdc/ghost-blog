@@ -3,6 +3,14 @@
     {
       "source": "/bible",
       "destination": "/bible.html"
+    },
+    {
+      "source": "/subscribe",
+      "destination": "/subscribe.html"
+    },
+    {
+      "source": "/font-sample",
+      "destination": "/toolkit-sample"
     }
   ]
 }

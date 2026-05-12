@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Treatment Winning Bible | Pre-Order | Ghost</title>
   <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-icon.png">
   <meta name="description" content="The first comprehensive guide to winning commercial treatments. Book + professional toolkit. Pre-order now at launch price.">
 
@@ -742,12 +743,37 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
+      .scroll-indicator { position: relative; bottom: auto; margin-top: 1.5rem; }
+      .manifesto { padding: 1.5rem 2rem; }
       .manifesto-inner { margin-left: 0; }
       .manifesto-number {
         font-size: 5rem;
         position: relative;
         left: 0; top: 0;
         margin-bottom: 1rem;
+        display: block;
+        text-align: left;
+      }
+      .manifesto.flipped .manifesto-number {
+        position: relative;
+        left: 0;
+        right: auto;
+        top: 0;
+        text-align: left;
+      }
+      .manifesto.flipped .manifesto-inner {
+        margin-right: 0;
+        margin-left: 0;
+        text-align: left;
+      }
+      .manifesto.flipped .manifesto-inner blockquote {
+        border-right: none;
+        border-left: 3px solid var(--amber);
+        padding-right: 0;
+        padding-left: 2rem;
+      }
+      .manifesto.flipped .manifesto-inner p {
+        margin-left: 0;
       }
       .section-header {
         flex-direction: column;
@@ -880,6 +906,12 @@
         <span class="principle-number">04</span>
         <h3>Production Companies</h3>
         <p>Hand your team the toolkit; font systems, colour palettes, layout blueprints, checklists; and their output quality jumps from day one. No more hoping the junior&nbsp;figures&nbsp;it&nbsp;out.</p>
+      </article>
+
+      <article class="principle" style="grid-column: 1 / -1; max-width: 400px; margin: 0 auto;">
+        <span class="principle-number">05</span>
+        <h3>Advertising Agencies</h3>
+        <p>Building pitch decks, reviewing treatments from directors, or presenting to clients; the principles are the same. A sharper eye for what wins and&nbsp;why.</p>
       </article>
     </div>
   </section>

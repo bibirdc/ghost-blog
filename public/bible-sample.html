@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excerpt — The Treatment Winning Bible | Ghost</title>
+  <meta name="description" content="A sample chapter from The Treatment Winning Bible. Discover why involvement, time management, and clarity are the foundation of winning treatments.">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:wght@300;400;700&family=Bodoni+Moda:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --cream: #f5f0e8;
+      --amber: #d4a853;
+      --amber-dim: #b8923f;
+      --amber-glow: rgba(212, 168, 83, 0.06);
+      --grey: #c0c0c0;
+      --off-white: #e8e4dc;
+      --border: rgba(245, 240, 232, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Jost', Georgia, sans-serif;
+      font-size: 1.12rem;
+      font-weight: 300;
+      line-height: 1.85;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s, padding 0.3s;
+    }
+    .nav.scrolled {
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--grey);
+      text-transform: uppercase;
+    }
+    .lang-switch {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .lang-btn {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--grey);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.2rem 0;
+      transition: color 0.3s;
+    }
+    .lang-btn:hover { color: var(--cream); }
+    .lang-btn.active { color: var(--amber); }
+    .lang-sep {
+      color: rgba(255,255,255,0.15);
+      font-size: 0.7rem;
+      user-select: none;
+    }
+    .nav-cta {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      background: var(--amber);
+      padding: 0.6rem 1.8rem;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--amber-dim);
+      transform: translateY(-1px);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to top, var(--black), transparent);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(0.65rem, 1vw, 0.75rem);
+      letter-spacing: 0.25em;
+      color: var(--amber);
+      background: var(--cream);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease-out 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 12vw, 10rem);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease-out 0.4s forwards;
+    }
+    .hero-title span { display: block; }
+    .hero-title .accent {
+      color: var(--amber);
+    }
+    .hero-title .involvement {
+      color: var(--cream);
+    }
+
+    .hero-subtitle {
+      max-width: none;
+      font-family: 'Bodoni Moda', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.01em;
+      color: var(--off-white);
+      max-width: 650px;
+      margin-top: -0.5rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease-out 0.6s forwards;
+    }
+    .subtitle-gold {
+      color: var(--amber);
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    .scroll-line {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0.5px;
+      height: 80px;
+      background: var(--amber);
+      opacity: 0;
+      animation: fadeIn 1s ease-out 1.2s forwards;
+    }
+
+    /* Drop cap */
+    .drop-cap::first-letter {
+      font-size: 4.5em;
+      float: left;
+      line-height: 0.75;
+      margin-right: 0.08em;
+      margin-top: 0.05em;
+      font-weight: 600;
+      color: var(--cream);
+    }
+
+    /* ─── CHAPTER CONTENT ─── */
+    .chapter {
+      padding: 0 2rem 2rem;
+      margin-top: -3rem;
+      position: relative;
+    }
+
+    .chapter-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .chapter p {
+      color: var(--off-white);
+      margin-bottom: 1.6rem;
+    }
+
+    .chapter p em {
+      color: var(--cream);
+      font-style: italic;
+    }
+
+    .chapter strong {
+      font-weight: 700;
+      color: var(--cream);
+    }
+
+    .chapter-img {
+      width: 100%;
+      margin: 2.5rem 0;
+      display: block;
+    }
+
+    .chapter-img-hero {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: center 30%;
+      margin: 2.5rem 0;
+      display: block;
+    }
+
+    /* Blockquote pull-out */
+    .chapter-quote {
+      border-left: 3px solid var(--amber);
+      padding: 1.5rem 0 1.5rem 2rem;
+      margin: 3rem 0 3rem -1rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      font-style: normal;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+      line-height: 1.4;
+    }
+
+    /* Section dividers */
+    .chapter-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+      margin: 3.5rem auto;
+      opacity: 0.4;
+    }
+
+    /* ─── FACTORS SECTION ─── */
+    .factors-intro {
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin-bottom: 3.5rem;
+    }
+
+    .factor {
+      margin-bottom: 3.5rem;
+      padding-left: 0;
+      position: relative;
+    }
+
+    .factor-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .factor-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: var(--amber);
+      opacity: 0.6;
+      line-height: 1;
+    }
+
+    .factor-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .factor-title::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--amber);
+    }
+
+    .factor p {
+      color: var(--off-white);
+      margin-bottom: 1rem;
+    }
+
+    .factor-questions {
+      color: var(--off-white);
+      font-style: normal;
+      font-size: 1.05rem;
+    }
+
+    /* Coming soon factors */
+    .factor-coming {
+      opacity: 0.35;
+      margin-bottom: 2rem;
+    }
+
+    .factor-coming .factor-title::after {
+      background: var(--grey);
+    }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      padding: 5rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-eyebrow {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      color: var(--amber);
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-text {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--grey);
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      background: var(--amber);
+      padding: 1rem 3.5rem;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .cta-btn:hover {
+      background: var(--amber-dim);
+      transform: translateY(-2px);
+    }
+
+    .cta-note {
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--grey);
+      font-style: italic;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: rgba(245, 240, 232, 0.2);
+      text-transform: uppercase;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Image: scale up from slightly smaller */
+    .chapter-img-hero, .chapter-img {
+      opacity: 0;
+      transform: scale(0.97);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .reveal.visible .chapter-img-hero,
+    .reveal.visible .chapter-img {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Factors: slide in from left */
+    .factor.reveal {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .factor.reveal.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Factor number: count-up feel with a slight scale */
+    .factor-number {
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-out;
+    }
+    .factor.reveal .factor-number {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    .factor.reveal.visible .factor-number {
+      opacity: 0.6;
+      transform: scale(1);
+      transition-delay: 0.2s;
+    }
+
+    /* Blockquote: border grows in */
+    .chapter-quote {
+      border-left-color: transparent;
+      transition: border-left-color 0.6s ease-out 0.3s;
+    }
+    .reveal.visible .chapter-quote {
+      border-left-color: var(--amber);
+    }
+
+    /* Dividers: expand from center */
+    .chapter-divider.reveal {
+      transform: scaleX(0);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out;
+    }
+    .chapter-divider.reveal.visible {
+      transform: scaleX(1);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .nav { flex-wrap: wrap; gap: 0.5rem; padding: 1rem 1.2rem; }
+      .nav-label { font-size: 0.65rem; }
+      .nav-cta { font-size: 0.75rem; padding: 0.5rem 1.2rem; }
+      .hero { padding: 9rem 1.5rem 0.5rem; min-height: auto; }
+      .scroll-line { position: relative; bottom: auto; left: auto; transform: none; margin: 0.5rem auto 0; height: 25px; }
+      .hero::after { height: 50px; }
+      .hero-title { font-size: 4.5rem; }
+      .hero-subtitle { font-size: 1.15rem; max-width: none; }
+      .chapter { margin-top: 0; padding-top: 0; }
+      .chapter-img-hero { margin-top: 0.5rem; }
+      body { font-size: 1.15rem; }
+      .chapter { padding: 3rem 1.5rem; }
+      .chapter-quote { margin-left: 0; padding-left: 1.5rem; font-size: 1.2rem; }
+      .factor-number { font-size: 2.5rem; }
+      .factor-title { font-size: 1.3rem; }
+      .cta-section { padding: 3.5rem 1.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-left">
+      <span class="nav-label" data-i18n="nav-label">The Treatment Winning Bible &mdash; Excerpt</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:1.5rem;">
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en">ENG</button>
+        <span class="lang-sep">/</span>
+        <button class="lang-btn" data-lang="pt">PT</button>
+        <span class="lang-sep">/</span>
+        <button class="lang-btn" data-lang="es">ESP</button>
+      </div>
+      <a href="/bible" class="nav-cta" data-i18n="nav-cta">Pre-Order Now</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow" data-i18n="eyebrow">Exclusive Preview</div>
+    <h1 class="hero-title">
+      <span class="accent" data-i18n="title1">The Art of</span>
+      <span class="involvement" data-i18n="title2">Involvement</span>
+    </h1>
+    <p class="hero-subtitle" data-i18n="subtitle">The difference between a winning treatment and a losing one often has everything to do with something very simple:<br><span class="subtitle-gold">how badly you&nbsp;want&nbsp;it.</span></p>
+    <div class="scroll-line"></div>
+  </section>
+
+  <!-- Chapter Content -->
+  <section class="chapter">
+    <div class="chapter-inner" id="chapter-content">
+
+      <div class="reveal">
+        <img src="/bible-hero.jpg" alt="" class="chapter-img-hero">
+        <p class="drop-cap">There is no single secret to winning a treatment. If you have been in the trenches of the difficult business of winning bids for commercials, you already know this is <strong>a multi-factorial enterprise</strong>: sometimes you win because you were the agency's pick, sometimes because you know the creative, sometimes because your schedule was open or your budget aligned.</p>
+
+        <p>Winning a treatment is not a simple pursuit. Luck plays its part. But after more than a decade in the industry, <strong>there are things that can add real control</strong> for whoever is involved in the treatment-making&nbsp;process.</p>
+      </div>
+
+      <div class="chapter-divider reveal"></div>
+
+      <div class="reveal">
+        <blockquote class="chapter-quote">Like everything else in life, in order to achieve anything, one must want it badly. So much so that it becomes a temporary&nbsp;obsession.</blockquote>
+
+        <p>One factor that is often overlooked, perhaps for its esoteric nature, but is nonetheless extremely important, is <strong>the level of involvement</strong>. Time and time again I have seen this play out: like everything else in life, in order to achieve anything, one must want it badly. So much so that it becomes a temporary obsession, something you simply can't take completely out of your mind, even when other thoughts and obligations are competing for your attention at the same&nbsp;time.</p>
+
+        <p>This level of obsession, or commitment to a creative vision, is so much more important than most realise, because when it comes to a finished treatment, <strong>care is measurable and easy to spot</strong>. It usually comes through in a high level of attention to detail. Due to the hasty nature of the treatment process, it's very common to spot sloppy add-ons, redesigns, rewritings, and so on. Which means that when your treatment <em>is</em> flawless, it stands&nbsp;out.</p>
+
+        <p>From the receiving end, it comes across as though <strong>the standard for the work itself, the commercial, has already been set</strong>. And ensuring that your first impression is one of absolute integrity and polish&nbsp;matters.</p>
+      </div>
+
+      <div class="chapter-divider reveal"></div>
+
+      <div class="reveal">
+        <p class="drop-cap">At this point, I probably know what you're thinking: <em>"But what about the tight deadlines?"</em> No one delivers sloppy work willingly, of course. Imperfection, you could say, is just part of the process, which more often than not does not respect the time actually needed for the creative juices to marinate, soften up, and cook up something&nbsp;incredible.</p>
+
+        <p>While this is true, that is precisely when <strong>time management</strong> comes into play: it's part of the EP's job, and I would argue the director's as well, and hopefully the creative team's too, to prevent rushed wrap-ups as much as possible by starting with a clear timeframe for&nbsp;deliveries.</p>
+
+        <p>Although this might sound simple at first, from experience I've also come to learn that <strong>designing schedules and timelines has to be tailored for each job</strong>. Perpetuating the idea that, say, two days is all it takes for visual research to be completed is already pushing the treatment onto a potentially unsuccessful&nbsp;path.</p>
+      </div>
+
+      <div class="chapter-divider reveal"></div>
+
+      <div class="reveal" style="margin-bottom: 4rem;">
+        <p class="factors-intro drop-cap">That's because, just as we noted at the beginning of this chapter, the natural state of a treatment is multi-layered and multi-factorial. Deciding the number of days for visual research will depend&nbsp;on:</p>
+      </div>
+
+      <!-- Factor 1 -->
+      <div class="factor reveal">
+        <div class="factor-header">
+          <span class="factor-number">01</span>
+          <h3 class="factor-title">The Brand</h3>
+        </div>
+        <p class="factor-questions">Is this a highly visual brand, or a more understated one? Is the brand clear about their creative direction; do they know what they're looking for, or are they "open to&nbsp;collaboration"?</p>
+      </div>
+
+      <!-- Factor 2 -->
+      <div class="factor reveal">
+        <div class="factor-header">
+          <span class="factor-number">02</span>
+          <h3 class="factor-title">The Project</h3>
+        </div>
+        <p class="factor-questions">Is it live action only? Does it involve CGI? AI? Celebrities? Multiple locations? A studio? The nature of the project helps dictate how much work and how many references, roughly, will be needed to properly illustrate a given&nbsp;treatment.</p>
+      </div>
+
+      <!-- Factor 3 -->
+      <div class="factor reveal">
+        <div class="factor-header">
+          <span class="factor-number">03</span>
+          <h3 class="factor-title">The Size</h3>
+        </div>
+        <p class="factor-questions">Is it a single-script film? Or a multiple-script campaign, with deliverables of 2', 1', and 30" versions, plus socials with different timings for different posts, still photography, and so on?</p>
+        <p>This third point is usually not just overlooked but actively downplayed by EPs as they rush to hire someone to handle the job, and it's understandable. But it's also <strong>absolutely crucial for the creative team to be aware from the start of the actual size of the&nbsp;campaign</strong>.</p>
+        <p>That's because, very quickly, a 24-hour turnaround promise for delivering a first round of images can be broken simply because there's too much material to cover. And adding conflict to an already tight schedule is the last thing anyone involved&nbsp;needs.</p>
+
+        <blockquote class="chapter-quote">If everyone is aligned from the get-go, the probability that plans will change midway decreases&nbsp;exponentially.</blockquote>
+
+        <p>This is when clarity, despite perhaps causing a bit of delay or even friction at the beginning, becomes crucial. If everyone is aligned from the get-go, the probability that plans will change midway decreases exponentially, having a direct positive effect on the chances of a project being&nbsp;successful.</p>
+      </div>
+
+      <!-- Factor 4 -->
+      <div class="factor reveal">
+        <div class="factor-header">
+          <span class="factor-number">04</span>
+          <h3 class="factor-title">The Director</h3>
+        </div>
+        <p>Every director works differently. Some will walk barefoot to the depths of Mordor to find the perfect reference, and "perfect" means something entirely different from director to director, while others are less precious about a specific image but more attached to the overall effect and mood of the selection. Some are very slow to respond, review, and select, while others do it&nbsp;instantly.</p>
+        <p>With time, EPs and the creative team, if working repeatedly with a given director, will learn what the workflow is with that specific director, making it easier to design a timeline of deliverables. But what you don't want is a timeline being set while disregarding this working style, because it's yet another factor that can take your treatment off track and diminish your chances of&nbsp;success.</p>
+
+        <blockquote class="chapter-quote">Making a treatment is already a similar experience to wearing a helmet that slowly fills with water in under 72 hours, so any strategy to ensure the water stays as low as possible for as long as possible is a winning&nbsp;one.</blockquote>
+
+        <img src="/bible-radiohead.webp" alt="" class="chapter-img">
+
+        <p>What many winning treatments have in common isn't just a director with a strong creative vision and a team of competent professionals to execute it, but <strong>an EP who knows their directors well</strong> and can coordinate the treatment process swiftly and&nbsp;effectively.</p>
+      </div>
+
+      <!-- Factor 5 -->
+      <div class="factor reveal">
+        <div class="factor-header">
+          <span class="factor-number">05</span>
+          <h3 class="factor-title">The Timezone</h3>
+        </div>
+        <p>This is one of the biggest unlocks when it comes to selecting the right treatment crew for a given project. It's a clever move to think about which time zone may benefit your project the most. For example: if you're based in LA, you might want someone based in Europe working on your project so that, when you wake up, you're almost a day ahead of&nbsp;everyone&nbsp;else.</p>
+        <p>And if you're in Europe, the opposite may be true. In some cases, it's more important for the creative team and the director to be working in the same time zone so that communication flows more smoothly (no unanswered texts at dawn in Europe when it's a perfectly normal working hour in NYC,&nbsp;for&nbsp;example).</p>
+        <blockquote class="chapter-quote">Over the years, we've come to realise that the best EPs have something in&nbsp;common:</blockquote>
+        <p>They know how to work out the most beneficial time zone configuration for a specific project, based on schedule, overall treatment deadline, and knowing where a particular director's favourite creatives are based. It's an exercise similar to completing a puzzle, but when the pieces fall into place, you get the best&nbsp;view&nbsp;of&nbsp;it&nbsp;all.</p>
+      </div>
+
+      <!-- Factor 6 -->
+      <div class="factor reveal">
+        <div class="factor-header">
+          <span class="factor-number">06</span>
+          <h3 class="factor-title">The Creative Team</h3>
+        </div>
+        <p>This is a tough one for researchers and designers to hear, but unfortunately piecing together the right crew isn't always simply about skill. It's about compatibility. See it this way: Enya is a great singer, but you wouldn't necessarily place her as a band member in the Rolling Stones. The vibe just doesn't match. They also possess very different&nbsp;musical&nbsp;skills.</p>
+        <blockquote class="chapter-quote">One could argue that combining unexpected elements is exactly what creates magic, and there's truth to that. However, in the fast-turnaround world of treatments, taking risks tends to take a&nbsp;back&nbsp;seat.</blockquote>
+        <p>Usually, the most advisable move is to put together a team that understands the director's workflow, style, creative voice, and communication.&nbsp;This&nbsp;is&nbsp;vital.</p>
+        <p>Portfolio relevance, project genre strengths, and tools are all very important, but if the overall compatibility isn't there, it will rarely translate to a&nbsp;successful&nbsp;treatment.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner reveal">
+      <div class="cta-eyebrow" data-i18n="cta-eyebrow">The Treatment Winning Bible</div>
+      <h2 class="cta-headline" data-i18n="cta-headline">This is just an excerpt.</h2>
+      <p class="cta-text" data-i18n="cta-text">Would you like to have full access to a competitive advantage in a high-stakes pitch&nbsp;process?</p>
+      <a href="/bible" class="cta-btn" data-i18n="cta-btn">Pre-Order the Treatment Winning Bible</a>
+      <p class="cta-note" data-i18n="cta-note">Launch price, limited availability</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-text">Ghost &mdash; The Treatment Winning Bible &mdash; 2026</span>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // Reveal on scroll with staggered delays for factors
+    const reveals = document.querySelectorAll('.reveal');
+    const factors = document.querySelectorAll('.factor.reveal');
+    factors.forEach((f, i) => {
+      f.style.transitionDelay = `${i * 0.08}s`;
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Subtle parallax on hero image
+    const heroImg = document.querySelector('.chapter-img-hero');
+    if (heroImg) {
+      window.addEventListener('scroll', () => {
+        const rect = heroImg.getBoundingClientRect();
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+          const shift = (rect.top / window.innerHeight) * 15;
+          heroImg.style.objectPosition = `center ${30 + shift}%`;
+        }
+      }, { passive: true });
+    }
+
+    // ── Language Switcher ──
+    const enChapter = document.getElementById('chapter-content').innerHTML;
+
+    const i18n = {
+      en: {
+        'nav-label': 'The Treatment Winning Bible \u2014 Excerpt',
+        'nav-cta': 'Pre-Order Now',
+        'eyebrow': 'Exclusive Preview',
+        'title1': 'The Art of',
+        'title2': 'Involvement',
+        'subtitle': 'The difference between a winning treatment and a losing one often has everything to do with something very simple:<br><span class="subtitle-gold">how badly you\u00a0want\u00a0it.</span>',
+        'cta-eyebrow': 'The Treatment Winning Bible',
+        'cta-headline': 'This is just an excerpt.',
+        'cta-text': 'Would you like to have full access to a competitive advantage in a high-stakes pitch\u00a0process?',
+        'cta-btn': 'Pre-Order the Treatment Winning Bible',
+        'cta-note': 'Launch price, limited availability',
+      },
+      pt: {
+        'nav-label': 'The Treatment Winning Bible \u2014 Excerto',
+        'nav-cta': 'Reservar Agora',
+        'eyebrow': 'Antestreia Exclusiva',
+        'title1': 'A Arte do',
+        'title2': 'Envolvimento',
+        'subtitle': 'A diferen\u00e7a entre um treatment vencedor e um perdedor tem, muitas vezes, tudo a ver com algo muito simples:<br><span class="subtitle-gold">o quanto voc\u00ea realmente\u00a0o\u00a0quer.</span>',
+        'cta-eyebrow': 'The Treatment Winning Bible',
+        'cta-headline': 'Isto \u00e9 apenas um excerto.',
+        'cta-text': 'Gostaria de ter acesso total a uma vantagem competitiva num processo de pitch\u00a0de\u00a0alto\u00a0risco?',
+        'cta-btn': 'Reservar o Treatment Winning Bible',
+        'cta-note': 'Pre\u00e7o de lan\u00e7amento,\u00a0disponibilidade\u00a0limitada',
+      },
+      es: {
+        'nav-label': 'The Treatment Winning Bible \u2014 Extracto',
+        'nav-cta': 'Reservar Ahora',
+        'eyebrow': 'Avance Exclusivo',
+        'title1': 'El Arte de la',
+        'title2': 'Implicaci\u00f3n',
+        'subtitle': 'La diferencia entre un treatment ganador y uno perdedor a menudo tiene que ver con algo muy simple:<br><span class="subtitle-gold">cu\u00e1nto\u00a0lo\u00a0deseas.</span>',
+        'cta-eyebrow': 'The Treatment Winning Bible',
+        'cta-headline': 'Esto es solo un extracto.',
+        'cta-text': '\u00bfTe gustar\u00eda tener acceso completo a una ventaja competitiva en un proceso de pitch\u00a0de\u00a0alto\u00a0riesgo?',
+        'cta-btn': 'Reservar el Treatment Winning Bible',
+        'cta-note': 'Precio de lanzamiento,\u00a0disponibilidad\u00a0limitada',
+      }
+    };
+
+    const ptChapter = `
+      <div class="reveal visible">
+        <img src="/bible-hero.jpg" alt="" class="chapter-img-hero" style="opacity:1;transform:scale(1)">
+        <p class="drop-cap">N\u00e3o existe um \u00fanico segredo para ganhar um treatment. Se j\u00e1 esteve nas trincheiras do dif\u00edcil neg\u00f3cio de ganhar propostas para comerciais, sabe que \u00e9 absolutamente <strong>uma empresa multifactorial</strong>: muitas vezes, a diferen\u00e7a entre ganhar e perder resume-se a ser a recomenda\u00e7\u00e3o da ag\u00eancia, ou ser amigo do criativo que concebeu a ideia para o filme, ou mesmo algo t\u00e3o pragm\u00e1tico como ter agenda livre ou cumprir\u00a0o\u00a0or\u00e7amento.</p>
+        <p>Ganhar um treatment n\u00e3o \u00e9 uma miss\u00e3o simples. A sorte tem o seu papel. Mas ap\u00f3s mais de uma d\u00e9cada na ind\u00fastria, podemos dizer com confian\u00e7a que <strong>h\u00e1 coisas que podem acrescentar algum n\u00edvel de controlo</strong> para quem est\u00e1 envolvido no processo de\u00a0cria\u00e7\u00e3o\u00a0de\u00a0treatments.</p>
+      </div>
+      <div class="chapter-divider reveal visible"></div>
+      <div class="reveal visible">
+        <blockquote class="chapter-quote" style="border-left-color:var(--amber)">Como tudo na vida, para alcan\u00e7ar qualquer coisa, \u00e9 preciso quer\u00ea-la intensamente. Tanto que se torna uma\u00a0obsess\u00e3o\u00a0tempor\u00e1ria.</blockquote>
+        <p>Um factor frequentemente ignorado, talvez pela sua natureza esot\u00e9rica, mas que \u00e9 extremamente importante, \u00e9 <strong>o n\u00edvel de envolvimento</strong>. Vezes sem conta tenho visto isto acontecer: como tudo na vida, para alcan\u00e7ar qualquer coisa, \u00e9 preciso quer\u00ea-la intensamente. Tanto que se torna uma obsess\u00e3o tempor\u00e1ria, algo que simplesmente n\u00e3o consegue tirar completamente da cabe\u00e7a, mesmo quando outros pensamentos e obriga\u00e7\u00f5es competem pela sua\u00a0aten\u00e7\u00e3o\u00a0ao\u00a0mesmo\u00a0tempo.</p>
+        <p>Este n\u00edvel de obsess\u00e3o, ou compromisso com uma vis\u00e3o criativa, \u00e9 muito mais importante do que a maioria percebe, porque quando se trata de um treatment finalizado, <strong>o cuidado \u00e9 mensur\u00e1vel e f\u00e1cil de identificar</strong>. Geralmente manifesta-se num elevado n\u00edvel de aten\u00e7\u00e3o ao detalhe. Devido \u00e0 natureza apressada do processo de treatments, \u00e9 muito comum encontrar acrescentos descuidados, redesigns, reescritas, etc. O que significa que quando o seu treatment <em>\u00e9</em> impec\u00e1vel,\u00a0ele\u00a0destaca-se.</p>
+        <p>Do lado de quem recebe, transmite a sensa\u00e7\u00e3o de que <strong>o padr\u00e3o para o pr\u00f3prio trabalho, o comercial, j\u00e1 foi estabelecido</strong>. E garantir que a sua primeira impress\u00e3o \u00e9 de absoluta integridade\u00a0e\u00a0polish\u00a0importa.</p>
+      </div>
+      <div class="chapter-divider reveal visible"></div>
+      <div class="reveal visible">
+        <p class="drop-cap">A esta altura, provavelmente sei o que est\u00e1 a pensar: <em>\u201cMas e os prazos apertados?\u201d</em> Ningu\u00e9m entrega trabalho descuidado voluntariamente, claro. A imperfei\u00e7\u00e3o, poder-se-ia dizer, faz parte do processo, que na maioria das vezes n\u00e3o respeita o tempo realmente necess\u00e1rio para os sucos criativos marinarem, amolecerem, e\u00a0cozinharem\u00a0algo\u00a0incr\u00edvel.</p>
+        <p>Embora isto seja verdade, \u00e9 precisamente a\u00ed que a <strong>gest\u00e3o de tempo</strong> entra em jogo: faz parte do trabalho do EP, e eu diria tamb\u00e9m do realizador, e esperemos que da equipa criativa tamb\u00e9m, prevenir conclus\u00f5es apressadas tanto quanto poss\u00edvel, come\u00e7ando com um cronograma\u00a0claro\u00a0para\u00a0as\u00a0entregas.</p>
+        <p>Embora isto possa parecer simples \u00e0 primeira vista, pela experi\u00eancia tamb\u00e9m aprendi que <strong>desenhar calend\u00e1rios e timelines tem de ser feito \u00e0 medida de cada trabalho</strong>. Perpetuar a ideia de que dois dias \u00e9 suficiente para completar a pesquisa visual \u00e9 j\u00e1 empurrar o treatment para um\u00a0caminho\u00a0potencialmente\u00a0falhado.</p>
+      </div>
+      <div class="chapter-divider reveal visible"></div>
+      <div class="reveal visible" style="margin-bottom: 4rem;">
+        <p class="factors-intro drop-cap">Isto porque, tal como not\u00e1mos no in\u00edcio deste cap\u00edtulo, o estado natural de um treatment \u00e9 multi-camada e multifactorial. Decidir o n\u00famero de dias para pesquisa\u00a0visual\u00a0vai\u00a0depender\u00a0de:</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">01</span><h3 class="factor-title">A Marca</h3></div>
+        <p class="factor-questions">\u00c9 uma marca altamente visual, ou mais discreta? A marca \u00e9 clara sobre a sua direc\u00e7\u00e3o criativa; sabem o que procuram, ou est\u00e3o \u201cabertos\u00a0a\u00a0colabora\u00e7\u00e3o\u201d?</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">02</span><h3 class="factor-title">O Projecto</h3></div>
+        <p class="factor-questions">\u00c9 apenas live action? Envolve CGI? AI? Celebridades? M\u00faltiplas localiza\u00e7\u00f5es? Um est\u00fadio? A natureza do projecto ajuda a ditar quanto trabalho e quantas refer\u00eancias, aproximadamente, ser\u00e3o necess\u00e1rias para ilustrar devidamente\u00a0um\u00a0dado\u00a0treatment.</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">03</span><h3 class="factor-title">A Dimens\u00e3o</h3></div>
+        <p class="factor-questions">\u00c9 um filme de um \u00fanico gui\u00e3o? Ou uma campanha multi-gui\u00e3o, com entreg\u00e1veis de vers\u00f5es de 2', 1' e 30", mais conte\u00fados sociais com timings diferentes para diferentes posts, fotografia\u00a0still,\u00a0etc?</p>
+        <p>Este terceiro ponto \u00e9 geralmente n\u00e3o s\u00f3 ignorado mas activamente minimizado pelos EPs na pressa de contratar algu\u00e9m para o trabalho, e \u00e9 compreens\u00edvel. Mas \u00e9 tamb\u00e9m <strong>absolutamente crucial que a equipa criativa esteja consciente desde o in\u00edcio da verdadeira\u00a0dimens\u00e3o\u00a0da\u00a0campanha</strong>.</p>
+        <p>Isto porque, muito rapidamente, uma promessa de entrega em 24 horas para uma primeira ronda de imagens pode ser quebrada simplesmente porque h\u00e1 demasiado material para cobrir. E acrescentar conflito a um calend\u00e1rio j\u00e1 apertado \u00e9 a \u00faltima coisa que\u00a0algu\u00e9m\u00a0envolvido\u00a0precisa.</p>
+        <blockquote class="chapter-quote" style="border-left-color:var(--amber)">Se todos estiverem alinhados desde o in\u00edcio, a probabilidade de os planos mudarem a\u00a0meio\u00a0diminui\u00a0exponencialmente.</blockquote>
+        <p>\u00c9 aqui que a clareza, apesar de talvez causar algum atraso ou mesmo fric\u00e7\u00e3o no in\u00edcio, se torna crucial. Se todos estiverem alinhados desde o in\u00edcio, a probabilidade de os planos mudarem a meio diminui exponencialmente, tendo um efeito positivo directo nas hip\u00f3teses de\u00a0sucesso\u00a0do\u00a0projecto.</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">04</span><h3 class="factor-title">O Realizador</h3></div>
+        <p>Cada realizador trabalha de forma diferente. Alguns caminhar\u00e3o descal\u00e7os at\u00e9 \u00e0s profundezas de Mordor para encontrar a refer\u00eancia perfeita, e \u201cperfeita\u201d significa algo completamente diferente de realizador para realizador, enquanto outros s\u00e3o menos preciosos com uma imagem espec\u00edfica mas mais ligados ao efeito geral e mood da selec\u00e7\u00e3o. Alguns s\u00e3o muito lentos a responder, rever e seleccionar, enquanto\u00a0outros\u00a0fazem-no\u00a0instantaneamente.</p>
+        <p>Com o tempo, os EPs e a equipa criativa, se trabalharem repetidamente com um dado realizador, aprender\u00e3o qual \u00e9 o workflow com esse realizador espec\u00edfico, tornando mais f\u00e1cil desenhar um cronograma de entreg\u00e1veis. Mas o que n\u00e3o se quer \u00e9 um cronograma definido ignorando este estilo de trabalho, porque \u00e9 mais um factor que pode desviar o treatment do caminho certo e diminuir\u00a0as\u00a0hip\u00f3teses\u00a0de\u00a0sucesso.</p>
+        <blockquote class="chapter-quote" style="border-left-color:var(--amber)">Fazer um treatment j\u00e1 \u00e9 uma experi\u00eancia semelhante a usar um capacete que lentamente se enche de \u00e1gua em menos de 72 horas; qualquer estrat\u00e9gia para garantir que a \u00e1gua fica o mais baixa poss\u00edvel pelo maior tempo poss\u00edvel \u00e9\u00a0uma\u00a0estrat\u00e9gia\u00a0vencedora.</blockquote>
+        <img src="/bible-radiohead.webp" alt="" class="chapter-img" style="opacity:1;transform:scale(1)">
+        <p>O que muitos treatments vencedores t\u00eam em comum n\u00e3o \u00e9 apenas um realizador com uma vis\u00e3o criativa forte e uma equipa de profissionais competentes para a executar, mas <strong>um EP que conhece bem os seus realizadores</strong> e consegue coordenar o processo de treatment de\u00a0forma\u00a0r\u00e1pida\u00a0e\u00a0eficaz.</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">05</span><h3 class="factor-title">O Fuso Hor\u00e1rio</h3></div>
+        <p>Este \u00e9 um dos maiores trunfos na hora de seleccionar a equipa criativa certa para um dado projecto. \u00c9 uma jogada inteligente pensar em qual fuso hor\u00e1rio pode beneficiar mais o seu projecto. Por exemplo: se est\u00e1 baseado em LA, pode querer algu\u00e9m baseado na Europa a trabalhar no seu projecto para que, quando acordar, esteja quase um dia \u00e0 frente de\u00a0todos\u00a0os\u00a0outros.</p>
+        <p>E se est\u00e1 na Europa, o oposto pode ser verdade. Em alguns casos, \u00e9 mais importante que a equipa criativa e o realizador estejam a trabalhar no mesmo fuso hor\u00e1rio para que a comunica\u00e7\u00e3o flua mais facilmente (sem mensagens por responder de madrugada na Europa quando \u00e9 um hor\u00e1rio de trabalho perfeitamente normal em Nova Iorque,\u00a0por\u00a0exemplo).</p>
+        <blockquote class="chapter-quote" style="border-left-color:var(--amber)">Ao longo dos anos, percebemos que os melhores EPs têm algo em comum:</blockquote>
+        <p>Sabem como encontrar a configuração de fuso horário mais benéfica para um projecto específico, com base no calendário, no prazo geral do treatment, e sabendo onde estão baseados os criativos favoritos de um dado realizador. É um exercício semelhante a completar um puzzle, mas quando as peças encaixam, obtém-se a melhor visão de tudo.</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">06</span><h3 class="factor-title">A Equipa Criativa</h3></div>
+        <p>Esta \u00e9 dif\u00edcil de ouvir para pesquisadores e designers, mas infelizmente montar a equipa certa nem sempre \u00e9 simplesmente uma quest\u00e3o de compet\u00eancia. \u00c9 uma quest\u00e3o de compatibilidade. Veja desta forma: a Enya \u00e9 uma grande cantora, mas n\u00e3o a colocaria necessariamente como membro dos Rolling Stones. O vibe simplesmente n\u00e3o combina. Possuem tamb\u00e9m compet\u00eancias musicais\u00a0muito\u00a0diferentes.</p>
+        <blockquote class="chapter-quote" style="border-left-color:var(--amber)">Poder-se-ia argumentar que combinar elementos inesperados é exactamente o que cria magia, e há verdade nisso. No entanto, no mundo de treatments com prazos apertados, correr riscos tende a ficar em segundo plano.</blockquote>
+        <p>Normalmente, a jogada mais aconselhável é montar uma equipa que compreenda o workflow, o estilo, a voz criativa e a comunicação do realizador. Isto é vital.</p>
+        <p>Relev\u00e2ncia do portf\u00f3lio, for\u00e7as em g\u00e9neros de projecto, e ferramentas s\u00e3o todos muito importantes, mas se a compatibilidade geral n\u00e3o existir, raramente se traduzir\u00e1 num\u00a0treatment\u00a0bem\u00a0sucedido.</p>
+      </div>`;
+
+    const esChapter = `
+      <div class="reveal visible">
+        <img src="/bible-hero.jpg" alt="" class="chapter-img-hero" style="opacity:1;transform:scale(1)">
+        <p class="drop-cap">No existe un \u00fanico secreto para ganar un treatment. Si ha estado en las trincheras del dif\u00edcil negocio de ganar propuestas para comerciales, sabe que esto es absolutamente <strong>una empresa multifactorial</strong>: muchas veces, la diferencia entre ganar y perder se reduce a ser la recomendaci\u00f3n de la agencia, o ser amigo del creativo que concibi\u00f3 la idea para el filme, o incluso algo tan pragm\u00e1tico como tener agenda libre o\u00a0cumplir\u00a0el\u00a0presupuesto.</p>
+        <p>Ganar un treatment no es una misi\u00f3n sencilla. La suerte juega su papel. Pero despu\u00e9s de m\u00e1s de una d\u00e9cada en la industria, podemos decir con confianza que <strong>hay cosas que pueden a\u00f1adir cierto nivel de control</strong> para quien est\u00e9 involucrado en el proceso\u00a0de\u00a0creaci\u00f3n\u00a0de\u00a0treatments.</p>
+      </div>
+      <div class="chapter-divider reveal visible"></div>
+      <div class="reveal visible">
+        <blockquote class="chapter-quote" style="border-left-color:var(--amber)">Como todo en la vida, para lograr cualquier cosa, uno debe desearlo intensamente. Tanto que se convierte en\u00a0una\u00a0obsesi\u00f3n\u00a0temporal.</blockquote>
+        <p>Un factor que a menudo se pasa por alto, quiz\u00e1s por su naturaleza esot\u00e9rica, pero que es extremadamente importante, es <strong>el nivel de implicaci\u00f3n</strong>. Una y otra vez he visto esto suceder: como todo en la vida, para lograr cualquier cosa, uno debe desearlo intensamente. Tanto que se convierte en una obsesi\u00f3n temporal, algo que simplemente no puedes sacar completamente de tu mente, incluso cuando otros pensamientos y obligaciones compiten por tu\u00a0atenci\u00f3n\u00a0al\u00a0mismo\u00a0tiempo.</p>
+        <p>Este nivel de obsesi\u00f3n, o compromiso con una visi\u00f3n creativa, es mucho m\u00e1s importante de lo que la mayor\u00eda cree, porque cuando se trata de un treatment finalizado, <strong>el cuidado es medible y f\u00e1cil de detectar</strong>. Generalmente se manifiesta en un alto nivel de atenci\u00f3n al detalle. Debido a la naturaleza apresurada del proceso de treatments, es muy com\u00fan encontrar a\u00f1adidos descuidados, redise\u00f1os, reescrituras, etc. Lo que significa que cuando tu treatment <em>es</em>\u00a0impecable,\u00a0destaca.</p>
+        <p>Desde el lado receptor, transmite la sensaci\u00f3n de que <strong>el est\u00e1ndar para el propio trabajo, el comercial, ya ha sido establecido</strong>. Y asegurar que tu primera impresi\u00f3n sea de absoluta integridad\u00a0y\u00a0pulcritud\u00a0importa.</p>
+      </div>
+      <div class="chapter-divider reveal visible"></div>
+      <div class="reveal visible">
+        <p class="drop-cap">A estas alturas, probablemente s\u00e9 lo que est\u00e1s pensando: <em>\u201c\u00bfPero qu\u00e9 pasa con los plazos ajustados?\u201d</em> Nadie entrega trabajo descuidado voluntariamente, claro. La imperfecci\u00f3n, podr\u00eda decirse, es parte del proceso, que la mayor\u00eda de las veces no respeta el tiempo realmente necesario para que los jugos creativos marinen, se ablanden, y\u00a0cocinen\u00a0algo\u00a0incre\u00edble.</p>
+        <p>Si bien esto es cierto, es precisamente ah\u00ed donde la <strong>gesti\u00f3n del tiempo</strong> entra en juego: es parte del trabajo del EP, y yo dir\u00eda que tambi\u00e9n del director, y esperemos que del equipo creativo tambi\u00e9n, prevenir cierres apresurados tanto como sea posible, comenzando con un\u00a0cronograma\u00a0claro\u00a0para\u00a0las\u00a0entregas.</p>
+        <p>Aunque esto pueda parecer simple a primera vista, por experiencia tambi\u00e9n he aprendido que <strong>dise\u00f1ar calendarios y cronogramas debe hacerse a medida de cada trabajo</strong>. Perpetuar la idea de que dos d\u00edas es suficiente para completar la investigaci\u00f3n visual ya est\u00e1 empujando el treatment hacia un\u00a0camino\u00a0potencialmente\u00a0fallido.</p>
+      </div>
+      <div class="chapter-divider reveal visible"></div>
+      <div class="reveal visible" style="margin-bottom: 4rem;">
+        <p class="factors-intro drop-cap">Esto se debe a que, tal como se\u00f1alamos al principio de este cap\u00edtulo, el estado natural de un treatment es multicapa y multifactorial. Decidir el n\u00famero de d\u00edas para la investigaci\u00f3n\u00a0visual\u00a0depender\u00e1\u00a0de:</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">01</span><h3 class="factor-title">La Marca</h3></div>
+        <p class="factor-questions">\u00bfEs una marca altamente visual, o m\u00e1s discreta? \u00bfLa marca tiene clara su direcci\u00f3n creativa; saben lo que buscan, o est\u00e1n\u00a0\u201cabiertos\u00a0a\u00a0colaborar\u201d?</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">02</span><h3 class="factor-title">El Proyecto</h3></div>
+        <p class="factor-questions">\u00bfEs solo live action? \u00bfInvolucra CGI? \u00bfIA? \u00bfCelebridades? \u00bfM\u00faltiples localizaciones? \u00bfUn estudio? La naturaleza del proyecto ayuda a dictar cu\u00e1nto trabajo y cu\u00e1ntas referencias, aproximadamente, ser\u00e1n necesarias para ilustrar\u00a0adecuadamente\u00a0un\u00a0treatment.</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">03</span><h3 class="factor-title">El Tama\u00f1o</h3></div>
+        <p class="factor-questions">\u00bfEs una pel\u00edcula de un solo gui\u00f3n? \u00bfO una campa\u00f1a multi-gui\u00f3n, con entregables de versiones de 2', 1' y 30", m\u00e1s contenidos sociales con diferentes tiempos para diferentes posts,\u00a0fotograf\u00eda\u00a0still,\u00a0etc?</p>
+        <p>Este tercer punto generalmente no solo se ignora sino que se minimiza activamente por los EPs en la prisa por contratar a alguien para el trabajo, y es comprensible. Pero tambi\u00e9n es <strong>absolutamente crucial que el equipo creativo sea consciente desde el inicio del verdadero\u00a0tama\u00f1o\u00a0de\u00a0la\u00a0campa\u00f1a</strong>.</p>
+        <p>Esto se debe a que, muy r\u00e1pidamente, una promesa de entrega en 24 horas para una primera ronda de im\u00e1genes puede romperse simplemente porque hay demasiado material que cubrir. Y a\u00f1adir conflicto a un calendario ya ajustado es lo \u00faltimo que\u00a0alguien\u00a0involucrado\u00a0necesita.</p>
+        <blockquote class="chapter-quote" style="border-left-color:var(--amber)">Si todos est\u00e1n alineados desde el principio, la probabilidad de que los planes cambien a mitad de\u00a0camino\u00a0disminuye\u00a0exponencialmente.</blockquote>
+        <p>Es aqu\u00ed donde la claridad, a pesar de quiz\u00e1s causar algo de retraso o incluso fricci\u00f3n al principio, se vuelve crucial. Si todos est\u00e1n alineados desde el inicio, la probabilidad de que los planes cambien a mitad de camino disminuye exponencialmente, teniendo un efecto positivo directo en las posibilidades de\u00a0\u00e9xito\u00a0del\u00a0proyecto.</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">04</span><h3 class="factor-title">El Director</h3></div>
+        <p>Cada director trabaja de forma diferente. Algunos caminar\u00e1n descalzos hasta las profundidades de Mordor para encontrar la referencia perfecta, y \u201cperfecta\u201d significa algo completamente diferente de director a director, mientras que otros son menos preciosos con una imagen espec\u00edfica pero m\u00e1s apegados al efecto general y el mood de la selecci\u00f3n. Algunos son muy lentos para responder, revisar y seleccionar, mientras que otros\u00a0lo\u00a0hacen\u00a0instant\u00e1neamente.</p>
+        <p>Con el tiempo, los EPs y el equipo creativo, si trabajan repetidamente con un director dado, aprender\u00e1n cu\u00e1l es el workflow con ese director espec\u00edfico, facilitando el dise\u00f1o de un cronograma de entregables. Pero lo que no quieres es un cronograma definido ignorando este estilo de trabajo, porque es otro factor m\u00e1s que puede desviar tu treatment del camino correcto y disminuir tus\u00a0posibilidades\u00a0de\u00a0\u00e9xito.</p>
+        <blockquote class="chapter-quote" style="border-left-color:var(--amber)">Hacer un treatment ya es una experiencia similar a llevar un casco que lentamente se llena de agua en menos de 72 horas; cualquier estrategia para asegurar que el agua se mantenga lo m\u00e1s baja posible durante el mayor tiempo posible es\u00a0una\u00a0estrategia\u00a0ganadora.</blockquote>
+        <img src="/bible-radiohead.webp" alt="" class="chapter-img" style="opacity:1;transform:scale(1)">
+        <p>Lo que muchos treatments ganadores tienen en com\u00fan no es solo un director con una visi\u00f3n creativa fuerte y un equipo de profesionales competentes para ejecutarla, sino <strong>un EP que conoce bien a sus directores</strong> y puede coordinar el proceso de treatment de\u00a0manera\u00a0r\u00e1pida\u00a0y\u00a0eficaz.</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">05</span><h3 class="factor-title">La Zona Horaria</h3></div>
+        <p>Este es uno de los mayores descubrimientos a la hora de seleccionar el equipo creativo adecuado para un proyecto dado. Es una jugada inteligente pensar en qu\u00e9 zona horaria puede beneficiar m\u00e1s a tu proyecto. Por ejemplo: si est\u00e1s en LA, quiz\u00e1s quieras a alguien en Europa trabajando en tu proyecto para que, cuando despiertes, est\u00e9s casi un d\u00eda por delante de\u00a0todos\u00a0los\u00a0dem\u00e1s.</p>
+        <p>Y si est\u00e1s en Europa, lo contrario puede ser cierto. En algunos casos, es m\u00e1s importante que el equipo creativo y el director est\u00e9n trabajando en la misma zona horaria para que la comunicaci\u00f3n fluya m\u00e1s f\u00e1cilmente (sin mensajes sin responder al amanecer en Europa cuando es un horario de trabajo perfectamente normal en Nueva York,\u00a0por\u00a0ejemplo).</p>
+        <blockquote class="chapter-quote" style="border-left-color:var(--amber)">A lo largo de los años, hemos llegado a comprender que los mejores EPs tienen algo en común:</blockquote>
+        <p>Saben cómo encontrar la configuración de zona horaria más beneficiosa para un proyecto específico, basándose en el calendario, el plazo general del treatment, y sabiendo dónde están basados los creativos favoritos de un director dado. Es un ejercicio similar a completar un puzzle, pero cuando las piezas encajan, se obtiene la mejor visión de todo.</p>
+      </div>
+      <div class="factor reveal visible" style="opacity:1;transform:translateX(0)">
+        <div class="factor-header"><span class="factor-number" style="opacity:0.6;transform:scale(1)">06</span><h3 class="factor-title">El Equipo Creativo</h3></div>
+        <p>Esta es dif\u00edcil de escuchar para investigadores y dise\u00f1adores, pero desafortunadamente armar el equipo correcto no siempre es simplemente cuesti\u00f3n de habilidad. Es cuesti\u00f3n de compatibilidad. V\u00e9alo as\u00ed: Enya es una gran cantante, pero no la colocar\u00edas necesariamente como miembro de los Rolling Stones. El vibe simplemente no combina. Tambi\u00e9n poseen habilidades musicales\u00a0muy\u00a0diferentes.</p>
+        <blockquote class="chapter-quote" style="border-left-color:var(--amber)">Se podría argumentar que combinar elementos inesperados es exactamente lo que crea magia, y hay verdad en eso. Sin embargo, en el mundo de treatments con plazos ajustados, tomar riesgos tiende a quedar en segundo plano.</blockquote>
+        <p>Normalmente, la jugada más aconsejable es armar un equipo que comprenda el workflow, el estilo, la voz creativa y la comunicación del director. Esto es vital.</p>
+        <p>Relevancia del portafolio, fortalezas en g\u00e9neros de proyecto, y herramientas son todos muy importantes, pero si la compatibilidad general no existe, rara vez se traducir\u00e1 en un\u00a0treatment\u00a0exitoso.</p>
+      </div>`;
+
+    const chapterTranslations = { en: enChapter, pt: ptChapter, es: esChapter };
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Swap simple text elements
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.dataset.i18n;
+          if (i18n[lang] && i18n[lang][key]) {
+            el.innerHTML = i18n[lang][key];
+          }
+        });
+
+        // Swap chapter content
+        document.getElementById('chapter-content').innerHTML = chapterTranslations[lang];
+      });
+    });
+  </script>
+</body>
+</html>

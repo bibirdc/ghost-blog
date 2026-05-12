@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toolkit Preview — The Treatment Winning Bible | Ghost</title>
+  <meta name="description" content="A free preview of the Treatment Winning Bible toolkit: 6 curated font pairings used on real commercial treatments.">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:wght@300;400;700&family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@400;500;600;700&family=Libre+Bodoni:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Fira+Sans:wght@300;400;500;600&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;700&family=Abril+Fatface&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --cream: #f5f0e8;
+      --amber: #d4a853;
+      --amber-dim: #b8923f;
+      --amber-glow: rgba(212, 168, 83, 0.06);
+      --grey: #c0c0c0;
+      --off-white: #e8e4dc;
+      --border: rgba(245, 240, 232, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Jost', Georgia, sans-serif;
+      font-size: 1.12rem;
+      font-weight: 300;
+      line-height: 1.85;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s, padding 0.3s;
+    }
+    .nav.scrolled {
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+    }
+    .nav-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--grey);
+      text-transform: uppercase;
+    }
+    .nav-cta {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      background: var(--amber);
+      padding: 0.6rem 1.8rem;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--amber-dim);
+      transform: translateY(-1px);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to top, var(--black), transparent);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(0.65rem, 1vw, 0.75rem);
+      letter-spacing: 0.25em;
+      color: var(--amber);
+      background: var(--cream);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease-out 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 12vw, 10rem);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease-out 0.4s forwards;
+    }
+    .hero-title span { display: block; }
+    .hero-title .accent { color: var(--amber); }
+
+    .hero-subtitle {
+      font-family: 'Bodoni Moda', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.01em;
+      color: var(--off-white);
+      max-width: 650px;
+      margin-top: -0.5rem;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease-out 0.6s forwards;
+    }
+    .subtitle-gold {
+      color: var(--amber);
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    .scroll-line {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0.5px;
+      height: 80px;
+      background: var(--amber);
+      opacity: 0;
+      animation: fadeIn 1s ease-out 1.2s forwards;
+    }
+
+    /* ─── INTRO ─── */
+    .intro {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .intro p {
+      color: var(--off-white);
+      font-family: 'Jost', Georgia, sans-serif;
+      font-size: 1.12rem;
+      font-weight: 300;
+      line-height: 1.85;
+      margin-bottom: 1.6rem;
+    }
+
+    .intro p em {
+      color: var(--cream);
+    }
+
+    /* Drop cap */
+    .drop-cap::first-letter {
+      font-size: 4.5em;
+      float: left;
+      line-height: 0.75;
+      margin-right: 0.08em;
+      margin-top: 0.05em;
+      font-weight: 600;
+      color: var(--cream);
+    }
+
+    .chapter-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--amber);
+      margin: 3rem auto;
+      opacity: 0.4;
+    }
+
+    /* ─── PAIRINGS GRID ─── */
+    .pairings-section {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+
+    .pairings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .pairing-card {
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .pairing-card:hover {
+      border-color: rgba(212, 168, 83, 0.3);
+    }
+
+    /* Card header */
+    .card-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 1.4rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--cream);
+      opacity: 0.5;
+      line-height: 1;
+    }
+
+    .card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      color: var(--amber);
+      text-transform: uppercase;
+    }
+
+    .card-tag {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey);
+      border: 1px solid rgba(245, 240, 232, 0.15);
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+    }
+
+    /* Treatment preview */
+    .card-preview {
+      padding: 3rem 2.5rem 3.5rem;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card-section-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .card-headline {
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      color: var(--cream);
+    }
+
+    .card-body {
+      line-height: 1.7;
+      color: rgba(245, 240, 232, 0.6);
+    }
+
+    /* Font info */
+    .card-fonts {
+      display: flex;
+      border-top: 1px solid var(--border);
+    }
+
+    .font-info {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .font-info + .font-info {
+      border-left: 1px solid var(--border);
+    }
+
+    .font-role {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--amber);
+    }
+
+    .font-name {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--cream);
+    }
+
+    .font-weight-info {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: rgba(245, 240, 232, 0.3);
+    }
+
+    /* Best for */
+    .card-use {
+      padding: 1.2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      font-family: 'Jost', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--grey);
+    }
+
+    .card-use strong {
+      color: var(--cream);
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      padding: 5rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-eyebrow {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      color: var(--amber);
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-text {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--grey);
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      background: var(--amber);
+      padding: 1rem 3.5rem;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .cta-btn:hover {
+      background: var(--amber-dim);
+      transform: translateY(-2px);
+    }
+
+    .cta-note {
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--grey);
+      font-style: italic;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: rgba(245, 240, 232, 0.2);
+      text-transform: uppercase;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .nav { flex-wrap: wrap; gap: 0.5rem; padding: 1rem 1.2rem; }
+      .nav-label { font-size: 0.65rem; }
+      .nav-cta { font-size: 0.75rem; padding: 0.5rem 1.2rem; }
+      .hero { padding: 9rem 1.5rem 0.5rem; min-height: auto; }
+      .hero-subtitle { font-size: 1.1rem; }
+      .scroll-line { position: relative; bottom: auto; left: auto; transform: none; margin: 2rem auto 0; height: 25px; }
+      .intro { padding: 2rem 1.5rem 3rem; }
+      .pairings-section { padding: 0 1.5rem 3rem; }
+      .pairings-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .card-preview { padding: 1.5rem 1.2rem 2rem; min-height: auto; }
+      .card-header { padding: 1rem 1.2rem; }
+      .card-fonts { flex-direction: column; }
+      .font-info + .font-info { border-left: none; border-top: 1px solid var(--border); }
+      .cta-section { padding: 3rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <span class="nav-label">The Treatment Winning Bible — Toolkit Preview</span>
+  <a href="/bible" class="nav-cta">Pre-Order Now</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">Exclusive Preview</div>
+  <h1 class="hero-title">
+    <span>Six</span>
+    <span class="accent">Font Pairings</span>
+    <span>That Win</span>
+    <span>Pitches</span>
+  </h1>
+  <p class="hero-subtitle">
+    Tested on real pitches. Free to use.
+    <span class="subtitle-gold">These are 6 of the 50+ pairings from the<br>Treatment Winning Bible toolkit.</span>
+  </p>
+  <div class="scroll-line"></div>
+</section>
+
+<!-- Intro -->
+<div class="intro reveal">
+  <p class="drop-cap">These six pairings come from the <a href="https://treatmentsbyghost.com/bible" style="color: var(--amber); text-decoration: none; border-bottom: 1px solid var(--amber-dim);">Treatment Winning Bible</a> toolkit, a collection of 50+ combinations tested on real commercial pitches. Every font here is free on Google Fonts so you can download and use it.</p>
+  <p>Pick one, drop it into your next treatment, and see the difference good type makes.</p>
+</div>
+
+<div class="chapter-divider reveal"></div>
+
+<!-- Pairings Grid -->
+<section class="pairings-section">
+  <div class="pairings-grid">
+
+    <!-- 01 — Dynamic Modern (was 05) -->
+    <div class="pairing-card reveal">
+      <div class="card-header">
+        <span class="card-number">01</span>
+        <span class="card-name">Dynamic Modern</span>
+        <span class="card-tag">Sans + Sans</span>
+      </div>
+      <div class="card-preview">
+        <h2 class="card-headline" style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 2rem;">
+          Elevated realism through an optimistic and approachable lens.
+        </h2>
+        <p class="card-body" style="font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 300;">
+          The campaign unfolds as a series of lived-in vignettes, which operate like fragments of a journey rather than a linear narrative.
+        </p>
+      </div>
+      <div class="card-fonts">
+        <div class="font-info">
+          <span class="font-role">Heading</span>
+          <span class="font-name">Syne</span>
+          <span class="font-weight-info">700</span>
+        </div>
+        <div class="font-info">
+          <span class="font-role">Body</span>
+          <span class="font-name">DM Sans</span>
+          <span class="font-weight-info">300</span>
+        </div>
+      </div>
+      <div class="card-use"><strong>Best for:</strong> Tech, automotive, gaming, contemporary brands</div>
+    </div>
+
+    <!-- 02 — Expressive Serif (was 06) -->
+    <div class="pairing-card reveal">
+      <div class="card-header">
+        <span class="card-number">02</span>
+        <span class="card-name">Expressive Serif</span>
+        <span class="card-tag">Display + Sans</span>
+      </div>
+      <div class="card-preview">
+        <h2 class="card-headline" style="font-family: 'Abril Fatface', serif; font-weight: 400; font-size: 2.1rem;">
+          Elevated realism through an optimistic and approachable lens.
+        </h2>
+        <p class="card-body" style="font-family: 'Lato', sans-serif; font-size: 1rem; font-weight: 300;">
+          The campaign unfolds as a series of lived-in vignettes, which operate like fragments of a journey rather than a linear narrative.
+        </p>
+      </div>
+      <div class="card-fonts">
+        <div class="font-info">
+          <span class="font-role">Heading</span>
+          <span class="font-name">Abril Fatface</span>
+          <span class="font-weight-info">400</span>
+        </div>
+        <div class="font-info">
+          <span class="font-role">Body</span>
+          <span class="font-name">Lato</span>
+          <span class="font-weight-info">300</span>
+        </div>
+      </div>
+      <div class="card-use"><strong>Best for:</strong> Food, hospitality, wine, heritage brands</div>
+    </div>
+
+    <!-- 03 — Refined Luxury -->
+    <div class="pairing-card reveal">
+      <div class="card-header">
+        <span class="card-number">03</span>
+        <span class="card-name">Refined Luxury</span>
+        <span class="card-tag">Serif + Sans</span>
+      </div>
+      <div class="card-preview">
+        <h2 class="card-headline" style="font-family: 'Bodoni Moda', serif; font-weight: 500; font-size: 1.9rem;">
+          Elevated realism through an optimistic and approachable lens.
+        </h2>
+        <p class="card-body" style="font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 300;">
+          The campaign unfolds as a series of lived-in vignettes, which operate like fragments of a journey rather than a linear narrative.
+        </p>
+      </div>
+      <div class="card-fonts">
+        <div class="font-info">
+          <span class="font-role">Heading</span>
+          <span class="font-name">Bodoni Moda</span>
+          <span class="font-weight-info">500</span>
+        </div>
+        <div class="font-info">
+          <span class="font-role">Body</span>
+          <span class="font-name">Jost</span>
+          <span class="font-weight-info">300</span>
+        </div>
+      </div>
+      <div class="card-use"><strong>Best for:</strong> Fashion, luxury, beauty, fragrance</div>
+    </div>
+
+    <!-- 04 — Fashion Forward -->
+    <div class="pairing-card reveal">
+      <div class="card-header">
+        <span class="card-number">04</span>
+        <span class="card-name">Fashion Forward</span>
+        <span class="card-tag">Serif + Sans</span>
+      </div>
+      <div class="card-preview">
+        <h2 class="card-headline" style="font-family: 'Cormorant', serif; font-weight: 500; font-size: 2rem;">
+          Elevated realism through an optimistic and approachable lens.
+        </h2>
+        <p class="card-body" style="font-family: 'Fira Sans', sans-serif; font-size: 1rem; font-weight: 300;">
+          The campaign unfolds as a series of lived-in vignettes, which operate like fragments of a journey rather than a linear narrative.
+        </p>
+      </div>
+      <div class="card-fonts">
+        <div class="font-info">
+          <span class="font-role">Heading</span>
+          <span class="font-name">Cormorant</span>
+          <span class="font-weight-info">500</span>
+        </div>
+        <div class="font-info">
+          <span class="font-role">Body</span>
+          <span class="font-name">Fira Sans</span>
+          <span class="font-weight-info">300</span>
+        </div>
+      </div>
+      <div class="card-use"><strong>Best for:</strong> Editorial, lifestyle, travel, premium retail</div>
+    </div>
+
+    <!-- 05 — Cinematic (was 01) -->
+    <div class="pairing-card reveal">
+      <div class="card-header">
+        <span class="card-number">05</span>
+        <span class="card-name">Cinematic</span>
+        <span class="card-tag">Serif + Serif</span>
+      </div>
+      <div class="card-preview">
+        <h2 class="card-headline" style="font-family: 'Cinzel', serif; font-weight: 500; font-size: 2rem;">
+          Elevated realism through an optimistic and approachable lens.
+        </h2>
+        <p class="card-body" style="font-family: 'Libre Bodoni', serif; font-size: 1rem;">
+          The campaign unfolds as a series of lived-in vignettes, which operate like fragments of a journey rather than a linear narrative.
+        </p>
+      </div>
+      <div class="card-fonts">
+        <div class="font-info">
+          <span class="font-role">Heading</span>
+          <span class="font-name">Cinzel</span>
+          <span class="font-weight-info">500</span>
+        </div>
+        <div class="font-info">
+          <span class="font-role">Body</span>
+          <span class="font-name">Libre Bodoni</span>
+          <span class="font-weight-info">400</span>
+        </div>
+      </div>
+      <div class="card-use"><strong>Best for:</strong> Film, drama, prestige brand campaigns</div>
+    </div>
+
+    <!-- 06 — Bold Editorial (was 02) -->
+    <div class="pairing-card reveal">
+      <div class="card-header">
+        <span class="card-number">06</span>
+        <span class="card-name">Bold Editorial</span>
+        <span class="card-tag">Display + Sans</span>
+      </div>
+      <div class="card-preview">
+        <h2 class="card-headline" style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 2.4rem; letter-spacing: 0.02em;">
+          Elevated realism through an optimistic and approachable lens.
+        </h2>
+        <p class="card-body" style="font-family: 'Source Sans 3', sans-serif; font-size: 1rem;">
+          The campaign unfolds as a series of lived-in vignettes, which operate like fragments of a journey rather than a linear narrative.
+        </p>
+      </div>
+      <div class="card-fonts">
+        <div class="font-info">
+          <span class="font-role">Heading</span>
+          <span class="font-name">Bebas Neue</span>
+          <span class="font-weight-info">400</span>
+        </div>
+        <div class="font-info">
+          <span class="font-role">Body</span>
+          <span class="font-name">Source Sans 3</span>
+          <span class="font-weight-info">400</span>
+        </div>
+      </div>
+      <div class="card-use"><strong>Best for:</strong> Sports, streetwear, music, high-energy campaigns</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="cta-eyebrow">This is 6 of 50+</p>
+    <h2 class="cta-headline">Every Decision, Already Made For You</h2>
+    <p class="cta-text">50+ font pairings. 30+ colour systems. Layout blueprints. A visual research guide. Original textures. A treatment checklist. Everything you need to walk into a pitch with confidence.</p>
+    <a href="/bible" class="cta-btn">Get the Full Toolkit</a>
+    <p class="cta-note"><strong style="color: var(--amber);">$79</strong> pre-order &middot; $99 after launch</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p class="footer-text">Treatments by Ghost &middot; All fonts are free via Google Fonts</p>
+</footer>
+
+<script>
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

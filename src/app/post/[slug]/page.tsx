@@ -79,6 +79,18 @@ export default async function PostPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: cleanedContent }}
       />
 
+      <div className="newsletter-cta" id="newsletter-cta">
+        <p className="newsletter-label">Free with every signup</p>
+        <h3>Get a free excerpt from The Treatment Winning Bible</h3>
+        <p>
+          Plus weekly insights on treatment design, visual research,
+          and what actually wins pitches. No fluff. Unsubscribe anytime.
+        </p>
+        <a href="/subscribe" className="cta-button">
+          Subscribe and get the excerpt
+        </a>
+      </div>
+
       {post.tags.length > 0 && (
         <div className="post-tags">
           <p className="post-tags-label section-label">Tags</p>
@@ -91,20 +103,6 @@ export default async function PostPage({ params }: PageProps) {
           </div>
         </div>
       )}
-
-      <div className="newsletter-cta">
-        <h3>Enjoyed this read?</h3>
-        <p>
-          Get more insights on treatment design and the advertising industry
-          straight to your inbox.
-        </p>
-        <a
-          href="mailto:info@treatmentsbyghost.com?subject=Newsletter%20Signup"
-          className="cta-button"
-        >
-          Subscribe
-        </a>
-      </div>
     </article>
   );
 }
